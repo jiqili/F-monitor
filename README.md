@@ -33,4 +33,5 @@ Promise异常会触发`unhandledrejection`事件
 Google基于此开源了`web-vitals`插件
 # 发送方式
 将以上监控数据带上时间缓存在队列里，分批发送给后端，一个个发送太耗费通信资源。
+
 为了不影响页面性能，将发送数据这个动作放在`requestIdleCallback`函数里，这个函数是趁着页面刷新间隙执行的，这段时间浏览器是空闲的。
