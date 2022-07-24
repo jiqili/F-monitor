@@ -1,0 +1,2 @@
+import './src/performance/index'
+
