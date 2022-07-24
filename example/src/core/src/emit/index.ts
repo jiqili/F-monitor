@@ -1,26 +1,9 @@
-type Timeout = ReturnType<typeof setTimeout>
+import {event} from "../env";
 
-/**
- * performance data with duration
- */
-interface performance {
-  duration: number
-}
-/**
- * event is monitor data unit
- * @param {*} type Error | Performance | User 
- * @param {*} name the name of event
- * @param {*} data the data of event
- */
-interface event {
-  type: 'Error' | 'Performance' | 'User',
-  name: string,
-  data: performance,
-  time?: number
-}
-
-let events:event[] = []
+type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
+
+let events: event[] = []
 const requestUrl: string | URL = 'http://localhost:8080'
 const MAX_CACHE_LEN = 5
 const MAX_WAITING_TIME = 5000
@@ -30,7 +13,7 @@ const MAX_WAITING_TIME = 5000
  * @param {*} data the event with type, name and data
  */
 function emit(data: event) {
-  data.time = Date.now()
+  data.timeStamp = Date.now()
   events.push(data)
   clearTimeout(timer)
   events.length >= MAX_CACHE_LEN
