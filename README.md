@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-[项目参考](https://github.com/M-cheng-web/web-tracing)
-=======
+[项目参考](https://github.com/M-cheng-web/web-tracing)  
 ## 功能模块
 
 1. #### SDK
