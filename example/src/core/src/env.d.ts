@@ -1,6 +1,8 @@
 /**
  * performance data
  */
+import {Context} from "./context/context";
+
 export interface performance {
     duration?: number
 }
@@ -27,11 +29,20 @@ export interface user {
 export interface event {
     type: 'Error' | 'Performance' | 'User' | 'Request'
     name: string
-    data: performance | user
+    data: performance | user | any // todo: temp
     uuid?: string
     timeStamp?: number
     browser?: string
     platform?: string
     sessionId?: string
     userUuid?: string
+}
+
+export interface options {
+    max_cache_len?: number
+    max_waiting_time?: number
+}
+
+export interface handler {
+    (ctx: Context): event
 }

@@ -1,24 +1,32 @@
 import {emit} from '../emit'
+import {Context} from "../context/context";
+import {event, handler} from "../env";
 
-const test = function () {
-  const [perfEntries] = performance.getEntriesByType("navigation");
-  let navigationEntry = perfEntries as PerformanceNavigationTiming
-  console.log(navigationEntry)
-}
-test()
 /*
 * FP FCP DOMReady DNS等
 * */
-const observer = new PerformanceObserver(list => {
-  for(const entry of list.getEntries()) {
-    console.log(entry)
-    emit({type: 'Performance', name: entry.name, data: {duration: entry.duration}})
-  }
-})
+
+const performanceHandler: handler = function (ctx: Context): event {
+  let navigationEntry = ctx.navigationEntry
+  let {domainLookupStart, domainLookupEnd} = navigationEntry
+  // DNS
+  let domainLookupTime = domainLookupEnd - domainLookupStart
+  console.log(ctx)
+  return {type: 'Performance', name: 'DNS', data: {DNS: domainLookupTime}}
+}
+
+
+const f = function () {
+  const observer = new PerformanceObserver(list => {
+    for(const entry of list.getEntries()) {
+      emit({type: 'Performance', name: entry.name, data: {duration: entry.duration}})
+    }
+  })
+  observer.observe({entryTypes:['paint']})
+}
+
 
 document.addEventListener('DOMContentLoaded',function(){
   emit({type: 'Performance', name: 'DOMContentLoaded', data: {}})
 });
-
-observer.observe({entryTypes:['paint']})
-export {}
+export {performanceHandler}
