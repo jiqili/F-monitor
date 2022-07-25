@@ -1,5 +1,11 @@
 import {emit} from '../emit'
 
+const test = function () {
+  const [perfEntries] = performance.getEntriesByType("navigation");
+  let navigationEntry = perfEntries as PerformanceNavigationTiming
+  console.log(navigationEntry)
+}
+test()
 /*
 * FP FCP DOMReady DNS等
 * */
