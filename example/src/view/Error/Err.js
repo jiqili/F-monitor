@@ -4,7 +4,7 @@ export default function Err() {
     //模拟白屏3s后加载页面
     const [flag, setFlag] = React.useState(false);
     React.useEffect(() => {
-        async function blankscreen() {
+        async function blankScreen() {
             await new Promise(resolve => {
                 setTimeout(() => {
                     setFlag(true);
@@ -13,9 +13,8 @@ export default function Err() {
             }).then((res) => {
                 // console.log(res);
             })
-
         }
-        blankscreen();
+        blankScreen();
     }, []);
     //上报自定义错误
     function handleClick() {
@@ -29,14 +28,17 @@ export default function Err() {
     if (flag) {
         return (
             <div className="info">
-                <h1 className="info--h1">i am err page</h1>
+                <h1 className="info--h1">I am error page</h1>
                 <button
                     onClick={handleClick}
                     className="info--button"
                 >上报自定义错误</button>
             </div>
-
         )
+    }else {
+      return (
+        <div>flag is {flag.toString()}</div>
+      )
     }
 
 }

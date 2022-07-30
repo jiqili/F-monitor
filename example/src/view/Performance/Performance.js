@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Performance() {
 
     function addScript() {
@@ -50,10 +50,11 @@ export default function Performance() {
         xhr.open('post', '/not-found');
         xhr.send(JSON.stringify({}));
     }
-
+    let navigate = useNavigate()
     return (
         <div className="info">
             <h1 className="info--h1">i am performance page</h1>
+            <button onClick={() => navigate("/pv")} className="info--button">测试PV</button>
             <button onClick={addScript} className="info--button">插入Script</button>
             <button onClick={addLink} className="info--button">插入Link</button>
             <button onClick={addCSS} className="info--button">插入引用其他资源的CSS文件</button>
