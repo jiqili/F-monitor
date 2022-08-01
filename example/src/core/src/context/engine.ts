@@ -7,12 +7,32 @@ export const defaultOptions: options = {
     max_cache_len: 5,
 }
 
-export class engine {
-    private handlers: handler[]
+/**
+ * @class Engine
+ * Engine作为SDK暴露给用户的接口
+ */
+export class Engine {
+    private handlers: handler[] // 每一个功能点相当于一个handler
+    private options: options
+    private static instance: Engine | null
+    /**
+     * 1. 初始化设置
+     * 2. 加载用户选择的handlers
+     * 3. 加载中间件
+     * @param options
+     */
     constructor(options: options) {
-        //todo: load options
+        this.options = {...defaultOptions, ...options}
         this.handlers = []
     }
+
+    static singleton(options: options) {
+        if(!this.instance) {
+            this.instance = new Engine(options)
+        }
+        return this.instance;
+    }
+
     register(handler: handler) {
         this.handlers.push(handler)
     }
