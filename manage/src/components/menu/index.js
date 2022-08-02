@@ -30,12 +30,12 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
   __routerArray=[
     '/',
     [
-      '/test',
+      '/linetest',
       '/test',
       '/',
     ],
     [
-      '/test',
+      '/linetest',
       '/',
       '/test'
     ]
@@ -66,7 +66,7 @@ export default function MENU() {
     <_Menu
       theme="dark"
       mode="inline"
-      defaultSelectedKeys={['1.1']}
+      defaultSelectedKeys={['0']}
       defaultOpenKeys={['1', '2']}
       items={__menuItems}
       forceSubMenuRender={true}

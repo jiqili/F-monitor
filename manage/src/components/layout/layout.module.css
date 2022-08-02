@@ -9,6 +9,7 @@
 
 .content_wrapper{
     margin-left:200px;
+    min-height: 100vh;
 }
 .content{
     margin:24px 16px 0;
