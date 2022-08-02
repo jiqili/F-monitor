@@ -35,3 +35,11 @@ export interface event {
     sessionId?: string
     userUuid?: string
 }
+
+export interface PerformanceEntryHandler {
+    (entry: PerformanceEntry): void
+}
+
+export interface OnHiddenCallback {
+    (event: Event): void
+}
