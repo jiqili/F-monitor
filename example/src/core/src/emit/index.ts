@@ -1,9 +1,10 @@
 import {event} from "../env";
+import {IlogData,IHttpReqErrorRes} from "../lib/xhr"
 
 type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
 
-let events: event[] = []
+let events: any[] = []
 const requestUrl: string | URL = 'http://localhost:8080'
 const MAX_CACHE_LEN = 5
 const MAX_WAITING_TIME = 5000
@@ -12,7 +13,7 @@ const MAX_WAITING_TIME = 5000
  * emit monitor data
  * @param {*} data the event with type, name and data
  */
-function emit(data: event) {
+function emit(data: event | IlogData | IHttpReqErrorRes) {
   data.timeStamp = Date.now()
   events.push(data)
   clearTimeout(timer)
