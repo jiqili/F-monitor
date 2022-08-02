@@ -1,38 +1,81 @@
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined,
-  } from '@ant-design/icons';
-  import {  Menu } from 'antd';
+  HomeOutlined,
+  ExclamationCircleOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
+const _Menu=dynamic(()=>import('antd').then(mod=>mod.Menu),{ssr:false});
+// import { Menu } from 'antd';
 
-function getItem(label,key,icon,children){
-    return {
-        key,
-        icon,
-        children,
-        label
-    };
-}
-const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-      getItem('Tom', '3'),
-      getItem('Bill', '4'),
-      getItem('Alex', '5'),
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
+const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
+  __ItemChildrens = [
+    null,
+    [
+      '脚本异常',
+      '资源下载',
+      '网络请求'
+    ],
+    [
+      '网络请求',
+      '资源下载',
+      '页面'
+    ]
+  ],
+  __iconArray = [
+    <HomeOutlined />,
+    <ExclamationCircleOutlined />,
+    <PieChartOutlined />
+  ],
+  __routerArray=[
+    '/',
+    [
+      '/test',
+      '/test',
+      '/',
+    ],
+    [
+      '/test',
+      '/',
+      '/test'
+    ]
   ];
+export default function MENU() {
+  const router=useRouter();
+  const __menuItems = __menuItemArray.map((label, index) => {
+    let obj = {
+      'label': label,
+      'key': `${index}`,
+      'icon': __iconArray[index]
+    }
+    if (__ItemChildrens[index]) {
+      const array=__routerArray[index];
+      obj.children = __ItemChildrens[index].map((label, secIndex) => {
+        return {
+          'label': label,
+          'key': `${index}.${secIndex}`,
+          'onClick':handlerClick.bind(null,router,array[secIndex]),
+        }
+      })
+    }else{
+      obj['onClick']=handlerClick.bind(null,router,__routerArray[index]);
+    }
+    return obj;
+  });
+  return (
+    <_Menu
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={['1.1']}
+      defaultOpenKeys={['1', '2']}
+      items={__menuItems}
+      forceSubMenuRender={true}
 
-  export default function MENU(){
-    return(
-        <Menu 
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={['1']} items={items}
-        />
-    )
-  }
+    />
+  )
+}
+
+
+function handlerClick(router,href){
+    router.push(href);
+}
