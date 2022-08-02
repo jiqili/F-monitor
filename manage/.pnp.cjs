@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@ant-design/icons", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.7.0"],\
             ["antd", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.21.7"],\
+            ["echarts", "npm:5.3.3"],\
             ["eslint", "npm:8.16.0"],\
             ["eslint-config-next", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:12.1.6"],\
             ["next", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:12.1.6"],\
@@ -995,6 +996,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/dom-align-npm-1.12.3-120bce476f-5d67a20e77.zip/node_modules/dom-align/",\
           "packageDependencies": [\
             ["dom-align", "npm:1.12.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["echarts", [\
+        ["npm:5.3.3", {\
+          "packageLocation": "./.yarn/cache/echarts-npm-5.3.3-e3b4e49969-d6feb97132.zip/node_modules/echarts/",\
+          "packageDependencies": [\
+            ["echarts", "npm:5.3.3"],\
+            ["tslib", "npm:2.3.0"],\
+            ["zrender", "npm:5.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2137,6 +2149,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["manage", "workspace:."],\
             ["@ant-design/icons", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.7.0"],\
             ["antd", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.21.7"],\
+            ["echarts", "npm:5.3.3"],\
             ["eslint", "npm:8.16.0"],\
             ["eslint-config-next", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:12.1.6"],\
             ["next", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:12.1.6"],\
@@ -4065,6 +4078,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:1.14.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.3.0", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.3.0-277e75e108-8869694c26.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["tsutils", [\
@@ -4188,6 +4208,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yallist-npm-4.0.0-b493d9e907-343617202a.zip/node_modules/yallist/",\
           "packageDependencies": [\
             ["yallist", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["zrender", [\
+        ["npm:5.3.2", {\
+          "packageLocation": "./.yarn/cache/zrender-npm-5.3.2-e18e68e64e-8f7f4c825c.zip/node_modules/zrender/",\
+          "packageDependencies": [\
+            ["zrender", "npm:5.3.2"],\
+            ["tslib", "npm:2.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
