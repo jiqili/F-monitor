@@ -19,7 +19,7 @@ const App: React.FC = () => {
   };
   return (
     <ConfigProvider locale={zhCN}>
-      <div style={{ width: 400, margin: '100px auto' }}>
+      <div className={'Wrapper'}>
         <DatePicker onChange={handleChange} />
         <div style={{ marginTop: 16 }}>
           当前日期：{date ? date.format('YYYY年MM月DD日') : '未选择'}

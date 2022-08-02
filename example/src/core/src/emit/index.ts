@@ -1,4 +1,5 @@
 import {event} from "../env";
+import {uuid} from "../utils/uuid";
 
 type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
@@ -14,6 +15,9 @@ const MAX_WAITING_TIME = 5000
  */
 function emit(data: event) {
   data.timeStamp = Date.now()
+  data.uuid = uuid()
+  // todo: 填补其他的字段
+  console.log(data)
   events.push(data)
   clearTimeout(timer)
   events.length >= MAX_CACHE_LEN
