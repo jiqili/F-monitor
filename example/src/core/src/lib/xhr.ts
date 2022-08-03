@@ -1,76 +1,47 @@
 import { event } from "../env";
 import { emit } from "../emit";
-class BaseObserver{
-  public _options: any
 
 
-  constructor(options: any) {
-    this._options = options;
-  }
-}
-
-interface BaseError { //jichu
-  errorType: ErrorType;
-  url?: string | undefined;
-  path?: string | undefined;
-  context?: any;
-}
-
-export interface IHttpReqErrorRes extends BaseError { //http cuowu
+export interface IHttpReqErrorRes { //请求失败-上报http类型错误接口
   requestMethod: string | undefined;
+  sendTime?: number;
+  errorType: string; //错误类型 js、promise、http等
   requestUrl: string | undefined;
   requestData: string | null;
-  errorMsg?: string | undefined;
-  status?: number;
-  timeStamp?:number;
+  errorMsg?: string | undefined; //错误信息
+  status?: number; //状态码
+  timeStamp?:number; //当前上报时间
 }
 
-enum ErrorType {
-  vueJsError = "vuejsError",
-  jsError = "jsError",
-  unHandleRejectionError = "unHandleRejectionError",
-  resourceError = "resourceError",
-  httpRequestError = "httpError"
-}
 
-export interface IlogData {
-  timeStamp?:number;
+export interface IlogData {//请求成功-上报数据接口
+  timeStamp?:number; //当前时间
   duration?: number; //持续时间
   requestUrl?: string; //请求地址
-  response?: string | Response; 
-  context?: any;
+  sendTime?: number;
+  response?: string | Response; //响应体
+  context?: any; //请求参数
   requestMethod?: string;
   requestData?: any; 
   status: number; //状态码
 }
-
 // global.d.ts
-// interface XMLHttpRequest {
+// interface XMLHttpRequest { 因为xml原型对象上不存在_url，要给它写个接口
 //   _url?: string;
 //   _method: string;
 //   _isUrlInIgnoreList: boolean; 判断请求是否发给监测后台，是的话则忽略监测此请求,防止死循环
 // }
 
-interface IAjaxReqStartRes {
-  context: any;
-}
 
 
 
-
-export class AjaxInterceptor extends BaseObserver{
-  constructor(options: event){
-    super(options)
-    this._options = options
-  }
+export class AjaxInterceptor {
 
   init(): void {
-    if (!XMLHttpRequest) return ; //XML bucunzai
-
-    const self=this; //self为new出来的xml实例,即this的指向
+    if (!XMLHttpRequest) return ; //XML不存在则返回  看浏览器兼容性
     const Oldopen = XMLHttpRequest.prototype.open
 
-    XMLHttpRequest.prototype.open = function(
+    XMLHttpRequest.prototype.open = function(//劫持open方法
       method: string,
       url: string | URL,
       async?: boolean
@@ -86,10 +57,6 @@ export class AjaxInterceptor extends BaseObserver{
         this._isUrlInIgnoreList = true
       }
 
-      const reqStartRes: IAjaxReqStartRes = {
-        context: this
-      }
-
       return Oldopen.call(
         this,
         method,
@@ -102,7 +69,7 @@ export class AjaxInterceptor extends BaseObserver{
     XMLHttpRequest.prototype.send = function (...rest: any[]) {
       const body = rest[0]
       const requestData: string = body
-      const startTime = Date.now() //记录开始时间
+      const sendTime = Date.now() //记录发送时间
 
       this.addEventListener("readystatechange", function () {
         if (this._isUrlInIgnoreList){
@@ -111,25 +78,38 @@ export class AjaxInterceptor extends BaseObserver{
         
         if (this.readyState === 4 ) {//当state为4,所有相应数据接收完毕
           if (this.status >=200 && this.status < 300) {//请求成功
-            const logData: IlogData = {
-              duration: Date.now() - startTime,
+            
+            const successDataLog: IlogData = {
+              duration: Date.now() - sendTime,
               requestUrl: this.responseURL,
-              response: this.response ? JSON.stringify(this.response) : '',//响应体
-              context: this,
+              sendTime,
+              requestMethod: this._method,
+              requestData,
+              response: this.response,
               status: this.status
             }
-            emit(logData)
-          } else {//qingqiu shibai
-            const errorType = ErrorType.httpRequestError
+            console.log(successDataLog) 
+            emit({
+              type: 'Request',
+              name: 'xhr-success',
+              data: successDataLog,
+            })
+          } else {//请求失败
+
             const errorDataLog: IHttpReqErrorRes = {
               requestMethod: this._method,
               requestUrl: this._url,
-              requestData,//qingqiuti
-              errorType,//cuowuleixin httperror
-              context: this,
-              status: this.status
+              requestData,//请求体
+              sendTime,
+              errorType: 'httperror',//错误类型 httperror
+              status: this.status //状态码
             }
-            emit(errorDataLog)
+            console.log(errorDataLog) 
+            emit({
+              type: 'Request',
+              name: 'xhr-error',
+              data: errorDataLog,
+            })
           }
         }
       })
