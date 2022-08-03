@@ -3,6 +3,9 @@ import '../lib/observe'
 import observe from "../lib/observe";
 import {event} from "../env";
 
+// 可容忍的最大等待首屏时间
+const MAX_WAIT_LOAD_TIME = 10000
+
 const [perfEntries] = performance.getEntriesByType("navigation");
 const n = perfEntries as PerformanceNavigationTiming
 const [resourceEntries] = performance.getEntriesByType("resource");
@@ -19,7 +22,8 @@ const getPerformanceData = (isLoaded: boolean) => {
   const fp = n.domInteractive - n.fetchStart
   // 从 请求开始 到 load事件发送 的时间
   // 首屏时间
-  const fcp = isLoaded? n.loadEventStart - n.fetchStart: performance.now() - n.fetchStart
+  // 有时候因为某些资源请求非常慢，可能一分钟都没办法让页面load，统计这类数据也没有意义，返回-1表示异常
+  const fcp = isLoaded? n.loadEventStart - n.fetchStart: -1
   // dns时间（如有缓存为0）
   const dns = n.domainLookupEnd - n.domainLookupStart
   // 从 请求开始 到 DOM解析完成的时间
@@ -39,7 +43,7 @@ const init = () => {
   setTimeout(() => {
     window.removeEventListener('load', () => {getPerformanceData(true)})
     getPerformanceData(false)
-  }, 10000)
+  }, MAX_WAIT_LOAD_TIME)
   window.addEventListener('load', () => {getPerformanceData(true)})
 }
 
