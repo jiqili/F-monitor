@@ -15,3 +15,10 @@ yarn build && yarn start
 //如果需要修改端口直接使用 -p ${port}，如
 yarn dev -p 3030
 ```
+## 页面结构
+```
+src
+├─components    //组件库
+├─pages         //页面，内部的js文件约定为路由
+└─utils         //工具库
+```

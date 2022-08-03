@@ -1,10 +1,9 @@
-import LineChart from "@components/charts/LineChart";
-import { useEffect, useState } from "react";
-
-
-export default function App(){
-    const [state, setState] = useState({
+import React, { PureComponent } from "react";
+import {NormalLineChart} from "@components/charts/lines";
+export default class App extends PureComponent {
+    state = {
         lineChartData: {
+            isLoading:true,
             //折线图模拟数据
             xData: [
                 "2016/08/13",
@@ -16,30 +15,32 @@ export default function App(){
             ],
             seriesData: [22, 19, 88, 66, 5, 90],
         },
-    });
-    useEffect(()=>{
-        let timer=null;
-        let year=2021;
-        const handerSetState=(state)=>{
-            return{
+    };
+    timer = null;
+    year = 2022;
+    componentDidMount() {
+        this.timer=setInterval(() => {
+            this.setState({
                 lineChartData: {
-                    xData: [...state.lineChartData.xData, `${year++}/08/02`],
-                    seriesData: [...state.lineChartData.seriesData, Math.floor(Math.random() * 100)],
+                    isLoading:false,
+                    xData: [...this.state.lineChartData.xData, `${this.year++}/08/02`],
+                    seriesData: [...this.state.lineChartData.seriesData, Math.floor(Math.random() * 100)],
                 }
-            }
-        }
-        timer=setInterval(()=>{
-            setState(handerSetState)
-        },1000);
-
-        return ()=>clearInterval(timer);
-    },[]);
-    return (
-        <LineChart
-            title="折线图模拟数据"
-            xData={state.lineChartData.xData}
-            seriesData={state.lineChartData.seriesData}
-            width={1000}
-        />
-    );
+            })
+        }, 2000);
+    }
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+    render() {
+        return (
+            <NormalLineChart
+                title="折线图模拟数据"
+                xData={this.state.lineChartData.xData}
+                seriesData={this.state.lineChartData.seriesData}
+                width={1000}
+                isLoading={this.state.lineChartData.isLoading}
+            />
+        );
+    }
 }

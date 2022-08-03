@@ -1,18 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import * as echarts from "echarts";
+import { useInitCharts,useLoadingAnamationCharts } from "@utils/hooks/charts";
 
+import * as echarts from "echarts";
+import { useEffect } from "react";
 const Index = (props) => {
-    const { title, xData, seriesData, width = 400, height = 400, ...resProps } = props;
-    const chartRef = useRef(null);  //拿到DOM容器
+    const { title, isLoading=true,xData, seriesData, width = 400, height = 400, ...resProps } = props;
+    const chartRef=useInitCharts({width,height});
+    useLoadingAnamationCharts(chartRef,isLoading);
     useEffect(() => {
         let chart = echarts.getInstanceByDom(chartRef.current);
-        if (!chart) {
-            chart = echarts.init(chartRef.current, null, {
-                height, width,
-            });
-            //echart初始化容器
+        //加上isloading添加过度动画
+        if(isLoading){
+            return;
         }
-
         let option = {  //配置项(数据都来自于props)
             title: {
                 text: title
@@ -31,10 +30,6 @@ const Index = (props) => {
         };
         chart.setOption(option);
     }, [props]);
-    useEffect(()=>{
-        let chart=echarts.getInstanceByDom(chartRef.current);
-        return ()=>chart.dispose();
-    },[]);
 
     return <div ref={chartRef} ></div>
 }
