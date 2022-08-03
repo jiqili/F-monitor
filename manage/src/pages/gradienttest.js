@@ -1,24 +1,13 @@
-import React, { PureComponent, useEffect, useState } from "react";
-import { SmoothLineChart } from "@components/charts/lines";
-
+import { LineChart } from "@components/charts/lines";
+import { useFakerYearArr,useFakerNumArr, useFakerLoading } from "@utils/hooks/faker";
 
 
 const App = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([["2019-08-3", 116], ["2020-08-3", 12], ["2021-08-3", 15]]);
-    useEffect(() => {
-        //模拟网络请求
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-        let timer=setInterval(()=>{
-            setData((data)=>{
-                return [...data,["2022-08-3",Math.floor(Math.random()*120)]];
-            });
-        },1000);
-        return ()=>clearInterval(timer);
-    }, []);
-    return <SmoothLineChart
+    const time=500,initLength=1000;
+    const years=useFakerYearArr(initLength,time),
+    nums=useFakerNumArr(initLength,time),
+    isLoading=useFakerLoading(time);
+    return <LineChart
         isLoading={isLoading}
         width={1000}
         height={500}
@@ -35,7 +24,7 @@ const App = () => {
                 trigger: 'axis'
             },
             xAxis: {
-                data: data.map(item => { return item[0] }),
+                data: years,
             },
             yAxis: {},
 
@@ -43,7 +32,7 @@ const App = () => {
                 type: 'line',
                 //是否显示具体数据点
                 showSymbol: false,
-                data: data.map(item => { return item[1] }),
+                data: nums,
             }
         }}
     />

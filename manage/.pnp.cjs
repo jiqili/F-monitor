@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@ant-design/icons", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.7.0"],\
+            ["@faker-js/faker", "npm:7.3.0"],\
             ["antd", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.21.7"],\
             ["echarts", "npm:5.3.3"],\
             ["eslint", "npm:8.16.0"],\
@@ -166,6 +167,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:4.1.0"],\
             ["minimatch", "npm:3.1.2"],\
             ["strip-json-comments", "npm:3.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@faker-js/faker", [\
+        ["npm:7.3.0", {\
+          "packageLocation": "./.yarn/cache/@faker-js-faker-npm-7.3.0-210580d28e-ef5b64af30.zip/node_modules/@faker-js/faker/",\
+          "packageDependencies": [\
+            ["@faker-js/faker", "npm:7.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2148,6 +2158,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["manage", "workspace:."],\
             ["@ant-design/icons", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.7.0"],\
+            ["@faker-js/faker", "npm:7.3.0"],\
             ["antd", "virtual:4d63d05ff22f1a8b1a7bb6102dcd7eeff5a599ec58606f2c7737a4628008557b188a40d174605f9ba4ab2df7620d6c57c1127e64f56af157f0f87c85335b57f5#npm:4.21.7"],\
             ["echarts", "npm:5.3.3"],\
             ["eslint", "npm:8.16.0"],\

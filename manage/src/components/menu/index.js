@@ -5,8 +5,10 @@ import {
   ExclamationCircleOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
-const _Menu=dynamic(()=>import('antd').then(mod=>mod.Menu),{ssr:false});
-// import { Menu } from 'antd';
+import { useMenuActiveIndex } from '@components/context/menucontext';
+const Menu = dynamic(() => import('antd').then(mod => mod.Menu), { ssr: false });
+
+
 
 const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
   __ItemChildrens = [
@@ -27,12 +29,12 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
     <ExclamationCircleOutlined />,
     <PieChartOutlined />
   ],
-  __routerArray=[
+  __routerArray = [
     '/',
     [
       '/linetest',
       '/gradienttest',
-      '/',
+      '/stacklinetest',
     ],
     [
       '/linetest',
@@ -41,7 +43,8 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
     ]
   ];
 export default function MENU() {
-  const router=useRouter();
+  const router = useRouter();
+  const { activeIndex, setActiveIndex } = useMenuActiveIndex();
   const __menuItems = __menuItemArray.map((label, index) => {
     let obj = {
       'label': label,
@@ -49,24 +52,24 @@ export default function MENU() {
       'icon': __iconArray[index]
     }
     if (__ItemChildrens[index]) {
-      const array=__routerArray[index];
+      const array = __routerArray[index];
       obj.children = __ItemChildrens[index].map((label, secIndex) => {
         return {
           'label': label,
           'key': `${index}.${secIndex}`,
-          'onClick':handlerClick.bind(null,router,array[secIndex]),
+          'onClick': handlerClick.bind(null,setActiveIndex,`${index}.${secIndex}`, router, array[secIndex]),
         }
       })
-    }else{
-      obj['onClick']=handlerClick.bind(null,router,__routerArray[index]);
+    } else {
+      obj['onClick'] = handlerClick.bind(null, setActiveIndex,`${index}`,router, __routerArray[index]);
     }
     return obj;
   });
   return (
-    <_Menu
+    <Menu
       theme="dark"
       mode="inline"
-      defaultSelectedKeys={['0']}
+      selectedKeys={[activeIndex]}
       defaultOpenKeys={['1', '2']}
       items={__menuItems}
       forceSubMenuRender={true}
@@ -76,6 +79,7 @@ export default function MENU() {
 }
 
 
-function handlerClick(router,href){
-    router.push(href);
+function handlerClick(setActiveIndex, index, router, href) {
+  setActiveIndex(index);
+  router.push(href);
 }

@@ -1,7 +1,4 @@
-import { useInitCharts,useLoadingAnamationCharts } from "@utils/hooks/charts";
-
-import * as echarts from "echarts";
-import { useEffect } from "react";
+import { useInitCharts, useOptionsCharts } from "@utils/hooks/charts";
 const Index = (props) => {
     const { title, isLoading=true,xData, seriesData, width = 400, height = 400, ...resProps } = props;
     const chartRef=useInitCharts({width,height});

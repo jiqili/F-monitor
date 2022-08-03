@@ -95,6 +95,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@faker-js/faker@npm:7.3.0"
+  checksum: ef5b64af30ce0ec76cb22798fbbe50184946fac389b4d81235f9d8d9eaaa77d67a80f46954fa993996b7c774bae23314529a95a42a6b68794f0795976c9be82b
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.5
   resolution: "@humanwhocodes/config-array@npm:0.9.5"
@@ -1666,6 +1673,7 @@ __metadata:
   resolution: "manage@workspace:."
   dependencies:
     "@ant-design/icons": ^4.7.0
+    "@faker-js/faker": ^7.3.0
     antd: ^4.21.7
     echarts: ^5.3.3
     eslint: 8.16.0

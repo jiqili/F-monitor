@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import {NormalLineChart} from "@components/charts/lines";
+import { LineChart } from "@components/charts/lines";
 export default class App extends PureComponent {
     state = {
         lineChartData: {
-            isLoading:true,
+            isLoading: true,
             //折线图模拟数据
             xData: [
                 "2016/08/13",
@@ -19,10 +19,10 @@ export default class App extends PureComponent {
     timer = null;
     year = 2022;
     componentDidMount() {
-        this.timer=setInterval(() => {
+        this.timer = setInterval(() => {
             this.setState({
                 lineChartData: {
-                    isLoading:false,
+                    isLoading: false,
                     xData: [...this.state.lineChartData.xData, `${this.year++}/08/02`],
                     seriesData: [...this.state.lineChartData.seriesData, Math.floor(Math.random() * 100)],
                 }
@@ -34,10 +34,23 @@ export default class App extends PureComponent {
     }
     render() {
         return (
-            <NormalLineChart
-                title="折线图模拟数据"
-                xData={this.state.lineChartData.xData}
-                seriesData={this.state.lineChartData.seriesData}
+            <LineChart
+                option={{
+                    title: {
+                        text: "折线图模拟数据"
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: this.state.lineChartData.xData,
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: {
+                        data: this.state.lineChartData.seriesData,
+                        type: 'line'
+                    }
+                }}
                 width={1000}
                 isLoading={this.state.lineChartData.isLoading}
             />
