@@ -15,6 +15,7 @@ const MAX_WAITING_TIME = 5000
  * @param {*} data the event with type, name and data
  */
 function emit(data: event) {
+  console.log(data)
   data.timeStamp = Date.now()
   events.push(data)
   clearTimeout(timer)
