@@ -1,9 +1,11 @@
-import {event} from "../env";
+import {event} from "../env"; 
+import { func } from "prop-types";
+
 
 type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
 
-let events: event[] = []
+let events: any[] = []
 const requestUrl: string | URL = 'http://localhost:8080'
 const MAX_CACHE_LEN = 5
 const MAX_WAITING_TIME = 5000
