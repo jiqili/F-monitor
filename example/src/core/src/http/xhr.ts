@@ -95,7 +95,7 @@ export class AjaxInterceptor {
               data: successDataLog,
             })
           } else {//请求失败
-
+            
             const errorDataLog: IHttpReqErrorRes = {
               requestMethod: this._method,
               requestUrl: this._url,
