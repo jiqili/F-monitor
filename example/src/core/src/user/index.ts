@@ -12,15 +12,19 @@ const userAgent = getUserAgent()
 const initUser = async () => {
     const ip = await ipify()
     console.log(ip)
-    window.addEventListener('hashchange', () => {
-        console.log(111)
-        emit({
-            type: 'User', name: 'pv', data: {
-                ip,
-                'url': window.location.href
-            }
-        })
-    })
+    emit({type: 'User', name: 'pv', data: {
+            ip,
+            'url': window.location.href
+        }})
+    // window.addEventListener('hashchange', () => {
+    //     console.log(111)
+    //     emit({
+    //         type: 'User', name: 'pv', data: {
+    //             ip,
+    //             'url': window.location.href
+    //         }
+    //     })
+    // })
     window.addEventListener('popstate', () => {
         console.log(222)
         emit({
@@ -30,6 +34,14 @@ const initUser = async () => {
             }
         })
     })
+    const oldPushState = window.history.pushState.bind(window.history);
+    window.history.pushState = (...args) => {
+        oldPushState(...args)
+        emit({type: 'User', name: 'pv', data: {
+                ip,
+                'url': window.location.href
+            }})
+    }
     // history.pushState()
     // history.replaceState()
 }

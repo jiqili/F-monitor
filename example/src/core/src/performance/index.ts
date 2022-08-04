@@ -1,7 +1,4 @@
 import {emit, emitPatch} from '../emit'
-import '../lib/observe'
-import observe from "../lib/observe";
-import {event} from "../env";
 
 // 可容忍的最大等待首屏时间
 const MAX_WAIT_LOAD_TIME = 3000
