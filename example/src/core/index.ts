@@ -9,7 +9,7 @@ const ajaxInterceptor= new AjaxInterceptor()
 ajaxInterceptor.init()
 const fetchInterceptor= new FetchInterceptor()
 fetchInterceptor.init()
-initPerformance
+initPerformance()
 initUser()
 
 console.log('monitor plugin installed')

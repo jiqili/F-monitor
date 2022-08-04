@@ -11,7 +11,6 @@ const userAgent = getUserAgent()
 // console.log(document.cookie)
 const initUser = async () => {
     const ip = await ipify()
-    console.log(ip)
     emit({type: 'User', name: 'pv', data: {
             ip,
             'url': window.location.href
