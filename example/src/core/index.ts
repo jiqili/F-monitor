@@ -1,7 +1,7 @@
 import './src/performance/index'
-<<<<<<< HEAD
-import {AjaxInterceptor} from './src/lib/xhr'
-import {FetchInterceptor} from './src/lib/fetch'
+
+import {AjaxInterceptor} from './src/http/xhr'
+import {FetchInterceptor} from './src/http/fetch'
 import {init} from './src/performance'
 import {initUser} from './src/user'
 
@@ -12,11 +12,5 @@ import {initUser} from './src/user'
 
 initUser()
 
-=======
-import './src/http/index'
-// type: 'Error' | 'Performance' | 'User' | 'Request'
-// name: string
-// data: performance | user | 'Request'
->>>>>>> origin/xch
 console.log('monitor plugin installed')
 
