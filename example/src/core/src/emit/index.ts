@@ -1,5 +1,7 @@
 import {event} from "../env"; 
 import { func } from "prop-types";
+import {uuid} from "../utils/uuid";
+import {getBrowserInfo, getPlatform} from "../utils/user";
 
 
 type Timeout = ReturnType<typeof window.setTimeout>
@@ -20,13 +22,16 @@ function emitPatch(data: event[]) {
  * @param {*} data the event with type, name and data
  */
 function emit(data: event) {
-  console.log(data)
   data.timeStamp = Date.now()
+  data.uuid = uuid()
+  data.platform = getPlatform()
+  data.browser = getBrowserInfo()
   events.push(data)
   clearTimeout(timer)
   events.length >= MAX_CACHE_LEN
   ? send()
   : timer = setTimeout(send, MAX_WAITING_TIME)
+  console.log(data)
 }
 
 /**
