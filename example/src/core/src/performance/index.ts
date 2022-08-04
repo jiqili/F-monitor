@@ -66,10 +66,10 @@ const initPaintData = () => {
 }
 
 
-const init = () => {
+const initPerformance = () => {
   initNavigationData()
   initPaintData()
 }
 
 
-export {init}
+export {initPerformance}
