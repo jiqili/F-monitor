@@ -74,9 +74,10 @@ export const useFakerYearArr = (initLength = 100, time = 1000) => {
 export const useFakerLoading = (time = 1000) => {
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(!isLoading);
+        let timer = setTimeout(() => {
+            setLoading(false);
         }, time);
+        return () => clearInterval(timer);
     }, []);
     return isLoading;
 }
@@ -125,6 +126,37 @@ export const useFakerOclockTimeArr = (length = 0, time = 500) => {
     useEffect(() => {
         const timer = setInterval(() => {
             setArr((arr) => [...arr, execTime()]);
+        }, time);
+        return () => clearInterval(timer);
+    }, []);
+    return arr;
+}
+
+/**
+ * 固定长度的时序数组
+ */
+export const useFakerOclockTimeArrByOrder = (length = 0, time = 500) => {
+    let startHour = 8, startMinute = 0;
+    function execTime() {
+        if (startMinute >= 50) {
+            startMinute = 0;
+            startHour++;
+        } else {
+            startMinute += 10;
+        }
+        if (startHour >= 23) {
+            startHour = 0;
+        }
+        return `${startHour}:${startMinute}`;
+    }
+    const [arr, setArr] = useState(Array(length).fill(0).map(execTime));
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setArr((arr) => {
+                arr.shift();
+                arr.push(execTime());
+                return arr;
+            });
         }, time);
         return () => clearInterval(timer);
     }, []);

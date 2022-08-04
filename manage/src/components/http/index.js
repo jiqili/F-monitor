@@ -4,17 +4,18 @@
 
 import { LineChart } from "@components/charts/lines";
 import { PieChart } from "@components/charts/pies";
-import { useFakerColorArr, useFakerLoading, useFakerNumArr, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerRandomNumArr } from "@utils/hooks/faker";
+import { useFakerColorArr, useFakerLoading, useFakerNumArr, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr } from "@utils/hooks/faker";
 
 
 /**
- * 在不同时段请求成功和请求错误的双条形图
+ * 在不同时段请求成功和请求错误的双条形图--bar
  */
 
 export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 400 }) => {
-    const time = 2000, initLength = 4;
-    const timeArr = useFakerOclockTimeArr(initLength, time * 10000),
-        nums = useFakerRandomNumArr(initLength, time * 10000, 2),
+    const time = 1000, initLength = 4;
+    const timeArr = useFakerOclockTimeArrByOrder(initLength, time*3),
+        successArr=useFakerNumArrByOrderLen(initLength,time*3),
+        errorArr=useFakerNumArrByOrderLen(initLength,time*3),
         colors = useFakerColorArr(2),
         isLoading = useFakerLoading(time),
         names = ['成功', '失败'];
@@ -31,43 +32,52 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
             yAxis: {
                 type: 'category',
                 data: timeArr,
-                inverse: true,
-                animationDuration: 300,
-                animationDurationUpdate: 300,
+                // inverse: true,
+                animationDuration: time,
+                animationDurationUpdate: time,
             },
             tooltip: {
                 trigger: 'axis'
             },
-            series: nums.map((value, index) => {
-                return {
-                    realtimeSort: true,
+            series:[
+                {
+                    // realtimeSort: true,
                     type: 'bar',
-                    data: value.map((item) => {
-                        return {
-                            value: item,
-                            itemStyle: {
-                                color: colors[index],
-                            }
-                        }
-                    }),
+                    data: successArr,
                     label: {
                         show: true,
+                        position:'right',
                         valueAnimation: true
                     },
-                    color: colors[index],
-                    name: `请求${names[index]}的数量`,
+                    color: colors[0],
+                    name: `请求${names[0]}的数量`,
                     emphasis: {
                         //高亮指定线
                         focus: 'series'
                     },
-                }
-            }),
-            animationDuration: 1000,
-            animationDurationUpdate: 1000,
+                },
+                {
+                    // realtimeSort: true,
+                    type: 'bar',
+                    data: errorArr,
+                    label: {
+                        show: true,
+                        position:'right',
+                        valueAnimation: true
+                    },
+                    color: colors[1],
+                    name: `请求${names[1]}的数量`,
+                    emphasis: {
+                        //高亮指定线
+                        focus: 'series'
+                    },
+                },
+            ],
+            animationDuration: time,
+            animationDurationUpdate: time,
             animationEasing: 'linear',
             animationEasingUpdate: 'linear'
         }}
-
     />
 }
 /**
@@ -122,7 +132,6 @@ export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 4
 export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
     const time = 1500, initLength = 6;
     const data = useFakerNumArrByOrderLen(initLength, time),
-        colors = useFakerColorArr(initLength),
         isLoading = useFakerLoading(time),
         names = ['js异常', 'vue异常', 'promise异常', 'react异常', '请求错误异常', '未定义异常'];
 
