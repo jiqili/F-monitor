@@ -14,10 +14,7 @@ export const getPlatform = () => {
 
 const IPIFY_ENDPOINT_IPV6 = 'https://api.ipify.org?format=json';
 
-
-
 export async function ipify() {
-    fetch(IPIFY_ENDPOINT_IPV6)
+    return fetch(IPIFY_ENDPOINT_IPV6)
         .then(response => response.json())
-        .then(data => console.log(data));
 }
