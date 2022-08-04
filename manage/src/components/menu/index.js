@@ -5,7 +5,7 @@ import {
   ExclamationCircleOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
-import { useMenuActiveIndex } from '@components/context/menucontext';
+import { useMenuActiveIndex } from '@utils/hooks/menu';
 const Menu = dynamic(() => import('antd').then(mod => mod.Menu), { ssr: false });
 
 
@@ -37,7 +37,7 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
       '/stacklinetest',
     ],
     [
-      '/linetest',
+      '/realtimebar',
       '/',
       '/'
     ]
