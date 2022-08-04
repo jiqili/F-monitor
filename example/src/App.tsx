@@ -26,9 +26,9 @@ const Home = () => {
   let navigate = useNavigate()
   return (
     <div className="info">
-        <iframe src={"http://www.baidu.com"}></iframe>
-        <iframe src={"http://www.baidu.com"}></iframe>
-        <iframe src={"http://www.baidu.com"}></iframe>
+        {/*<iframe src={"http://www.baidu.com"}></iframe>*/}
+        {/*<iframe src={"http://www.baidu.com"}></iframe>*/}
+        {/*<iframe src={"http://www.baidu.com"}></iframe>*/}
       <h1 className="info--h1">I am Homepage</h1>
       <button onClick={() => navigate("/event")} className="info--button">Action</button>
       <button onClick={() => navigate("/err")} className="info--button">Error</button>

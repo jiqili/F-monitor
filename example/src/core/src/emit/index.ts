@@ -10,6 +10,11 @@ const requestUrl: string | URL = 'http://localhost:8080'
 const MAX_CACHE_LEN = 5
 const MAX_WAITING_TIME = 5000
 
+function emitPatch(data: event[]) {
+  for (const item of data) {
+    emit(item)
+  }
+}
 /**
  * emit monitor data
  * @param {*} data the event with type, name and data
@@ -39,4 +44,4 @@ function send() {
   }
 }
 
-export {emit}
+export {emit, emitPatch}
