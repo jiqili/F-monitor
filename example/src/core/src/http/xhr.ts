@@ -44,8 +44,9 @@ export class AjaxInterceptor {
     XMLHttpRequest.prototype.send = function (...rest: any[]) {
       const stack = new Error().stack
       const body = rest[0]
-      const requestData: string = body
+      const requestData: string = typeof body === 'object' ? JSON.stringify(body) : body
       const sendTime = Date.now() //记录发送时间
+      console.log(rest)
 
       this.addEventListener("readystatechange", function () {
         if (this._isUrlInIgnoreList){
@@ -81,7 +82,7 @@ export class AjaxInterceptor {
               errorType: 'httperror',//错误类型 httperror
               status: this.status //状态码
             }
-            console.log(errorDataLog) 
+            console.log(stack) 
             emit({
               type: 'Request',
               name: 'xhr-error',
