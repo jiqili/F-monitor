@@ -1,38 +1,13 @@
-import { event } from "../env";
 import { emit } from "../emit";
+import { IHttpReqErrorRes, IlogData} from "./index"
 
 
-export interface IHttpReqErrorRes { //请求失败-上报http类型错误接口
-  requestMethod: string | undefined;
-  sendTime?: number;
-  errorType: string; //错误类型 js、promise、http等
-  requestUrl: string | undefined;
-  requestData: string | null;
-  errorMsg?: string | undefined; //错误信息
-  status?: number; //状态码
-  timeStamp?:number; //当前上报时间
-}
-
-
-export interface IlogData {//请求成功-上报数据接口
-  timeStamp?:number; //当前时间
-  duration?: number; //持续时间
-  requestUrl?: string; //请求地址
-  sendTime?: number;
-  response?: string | Response; //响应体
-  context?: any; //请求参数
-  requestMethod?: string;
-  requestData?: any; 
-  status: number; //状态码
-}
 // global.d.ts
 // interface XMLHttpRequest { 因为xml原型对象上不存在_url，要给它写个接口
 //   _url?: string;
 //   _method: string;
 //   _isUrlInIgnoreList: boolean; 判断请求是否发给监测后台，是的话则忽略监测此请求,防止死循环
 // }
-
-
 
 
 export class AjaxInterceptor {
