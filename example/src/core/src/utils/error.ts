@@ -14,8 +14,8 @@ export enum ErrorType {
 }
 
 export interface BaseError {
-    errorType: ErrorType;
-    url?: String | undefined;
-    path?: String | undefined;
-    context?: any;
+    errorType: ErrorType
+    url?: String | undefined
+    path?: String | undefined
+    context?: any
 }

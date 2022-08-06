@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
 export default function Err() {
     //模拟白屏3s后加载页面
-    const [flag, setFlag] = React.useState(true);
+    const [flag, setFlag] = React.useState(true)
     React.useEffect(() => {
         async function blankScreen() {
             await new Promise((resolve) => {
                 setTimeout(() => {
-                    setFlag(true);
-                    resolve('hello world');
-                }, 3000);
+                    setFlag(true)
+                    resolve('hello world')
+                }, 3000)
             }).then((res) => {
                 // console.log(res);
-            });
+            })
         }
-        blankScreen();
-    }, []);
+        blankScreen()
+    }, [])
     //上报自定义错误
     function handleClick() {
         // trace.traceError('自定义错误ID', '自定义错误message', {
@@ -26,9 +26,9 @@ export default function Err() {
         // });
     }
     function onLoadImageError() {
-        const image = document.createElement('img');
-        image.setAttribute('src', '/img/undefined.png');
-        document.body.appendChild(image);
+        const image = document.createElement('img')
+        image.setAttribute('src', '/img/undefined.png')
+        document.body.appendChild(image)
     }
 
     if (flag) {
@@ -42,8 +42,8 @@ export default function Err() {
                 <button onClick={onLoadCssError}>load css error</button> */}
                 <button onClick={onLoadImageError}>load image error</button>
             </div>
-        );
+        )
     } else {
-        return <div>flag is {flag.toString()}</div>;
+        return <div>flag is {flag.toString()}</div>
     }
 }

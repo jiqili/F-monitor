@@ -1,33 +1,33 @@
-import { emit } from '../emit';
-import { TrackerEvents, ErrorType, BaseError } from '../utils/error';
+import { emit } from '../emit'
+import { TrackerEvents, ErrorType, BaseError } from '../utils/error'
 export class Error {
     constructor() {}
 
     init(): void {
-        const self = this;
+        const self = this
         window.addEventListener('error', function (event) {
-            console.log('发生异常！');
-            const target: any = event.target || event.srcElement;
+            console.log('发生异常！')
+            const target: any = event.target || event.srcElement
             const isElementTarget =
                 target instanceof HTMLScriptElement ||
                 target instanceof HTMLLinkElement ||
-                target instanceof HTMLImageElement;
-            if (!isElementTarget) return false;
+                target instanceof HTMLImageElement
+            if (!isElementTarget) return false
 
-            let url: String;
+            let url: String
             if (target instanceof HTMLLinkElement) {
-                url = target.href;
+                url = target.href
             } else {
-                url = target.src;
+                url = target.src
             }
 
-            const errorType = ErrorType.resourceError;
+            const errorType = ErrorType.resourceError
             const errorObj: BaseError = {
                 url,
                 errorType: errorType,
                 context: this
-            };
-            emit({ type: 'Error', name: 'resourceData', data: errorObj });
-        });
+            }
+            emit({ type: 'Error', name: 'resourceData', data: errorObj })
+        })
     }
 }
