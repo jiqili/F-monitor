@@ -2,9 +2,10 @@ const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('monitor','root','123456', {
     host: 'localhost',
-    // host: '110.42.183.227',
+    host: '110.42.183.227',
     dialect: 'mysql',
-    timezone: '+08:00'
+    timezone: '+08:00',
+    port: '3305'
 });
 sequelize
     .authenticate()

@@ -1,11 +1,16 @@
 import { emit } from "../emit";
-import { IHttpReqErrorRes, IlogData} from "./index"
+import { IHttpReqErrorRes, IlogData, inoreTYPE, BaseInterceptor} from "./base"
 
 
-export class FetchInterceptor {
+export class FetchInterceptor extends BaseInterceptor {
+
+  constructor(ignoreList?: inoreTYPE){
+    super(ignoreList)
+  }
 
   init(): void {
     const OldFetch = fetch
+    const self = this
 
     Object.defineProperty(window, "fetch", {
       configurable:true,//可删除
@@ -15,13 +20,7 @@ export class FetchInterceptor {
             this._url = url
             this._method = options.method || 'get'
             this._data = options.body
-            if(!this._url.match(/jiancexitong/) && !this._url.match(/sockjs/))//防止死循环
-            {
-              this._isUrlInIgnoreList = false
-            }
-            else{
-              this._isUrlInIgnoreList = true
-            }
+            this._isUrlInIgnoreList=self.isUrlInIgnoreList(this._url)
 
             const sendTime: number = Date.now() //发送请求的开始时间
             return OldFetch(url, options)
