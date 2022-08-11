@@ -1,3 +1,4 @@
+import {IlogData,IHttpReqErrorRes} from "../lib/xhr"
 /**
  * performance data
  */
@@ -12,6 +13,8 @@ export interface user {
 
 }
 
+export interface Request extends IlogData,IHttpReqErrorRes{
+}
 /**
  * event is monitor data unit
  * @param {*} type Error | Performance | User
@@ -27,11 +30,19 @@ export interface user {
 export interface event {
     type: 'Error' | 'Performance' | 'User' | 'Request'
     name: string
-    data: performance | user
+    data: performance | user | Request
     uuid?: string
     timeStamp?: number
     browser?: string
     platform?: string
     sessionId?: string
     userUuid?: string
+}
+
+export interface PerformanceEntryHandler {
+    (entry: PerformanceEntry): void
+}
+
+export interface OnHiddenCallback {
+    (event: Event): void
 }

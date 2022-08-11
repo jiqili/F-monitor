@@ -1,24 +1,37 @@
-import {event} from "../env";
+import {event} from "../env"; 
+import { func } from "prop-types";
+import {uuid} from "../utils/uuid";
+import {getBrowserInfo, getPlatform} from "../utils/user";
+
 
 type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
 
-let events: event[] = []
+let events: any[] = []
 const requestUrl: string | URL = 'http://localhost:8080'
 const MAX_CACHE_LEN = 5
 const MAX_WAITING_TIME = 5000
 
+function emitPatch(data: event[]) {
+  for (const item of data) {
+    emit(item)
+  }
+}
 /**
  * emit monitor data
  * @param {*} data the event with type, name and data
  */
 function emit(data: event) {
   data.timeStamp = Date.now()
+  data.uuid = uuid()
+  data.platform = getPlatform()
+  data.browser = getBrowserInfo()
   events.push(data)
   clearTimeout(timer)
   events.length >= MAX_CACHE_LEN
   ? send()
   : timer = setTimeout(send, MAX_WAITING_TIME)
+  console.log(data)
 }
 
 /**
@@ -36,4 +49,4 @@ function send() {
   }
 }
 
-export {emit}
+export {emit, emitPatch}
