@@ -30,7 +30,7 @@ export interface Request extends IlogData,IHttpReqErrorRes{
 export interface event {
     type: 'Error' | 'Performance' | 'User' | 'Request'
     name: string
-    data: performance | user | Request
+    data: any
     uuid?: string
     timeStamp?: number
     browser?: string

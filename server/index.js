@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // const errorRouter = require('./routers/errorRouter')
 // const httpRouter = require('./routers/httpRouter')
 const userDataRouter = require('./routers/userDataRouter')
-const userDataController = require('./controllers/userDataController')
+const userDataController = require('./controllers/userDataController');
 var app = express()
 
 // express configs
@@ -23,9 +23,14 @@ app.use('/userData', userDataRouter)
 
 // urls for the monitored web
 app.post('/', function (req, res) {
-  if(req.body.type === 'User') {
-    userDataController.add(req.body.data)
-  }
+  console.log(req.body)
+  res.send('ok')
+  // if(req.body.type === 'User') {
+  //   userDataController.add(req.body.data)
+  // }
+})
+app.get('/cookie', (req, res) => {
+  res.send({data: 'ok'})
 })
 app.get('/xhr', (req, res) => {
   res.send('XHR request successfully.')

@@ -1,16 +1,11 @@
-import {getPlatform, getUserAgent, ipify} from "../utils/user";
 import {emit} from "../emit";
 
 /*
 * PV UV 自定义行为埋点 页面停留时间 用户热点页面
 * */
-// document.cookie = "11"
-// console.log(document.cookie)
-const initUser = async () => {
-    let ip = await ipify()
-    ip = ip.ip
+const initUser = () => {
     emit({type: 'User', name: 'pv', data: {
-            'ip': ip,
+            'user': document.cookie.split('=')[1],
             'url': window.location.href
         }})
     // window.addEventListener('hashchange', () => {
@@ -25,7 +20,7 @@ const initUser = async () => {
     window.addEventListener('popstate', () => {
         emit({
             type: 'User', name: 'pv', data: {
-                'ip': ip,
+                'user': document.cookie.split('=')[1],
                 'url': window.location.href
             }
         })
@@ -34,7 +29,7 @@ const initUser = async () => {
     window.history.pushState = (...args) => {
         oldPushState(...args)
         emit({type: 'User', name: 'pv', data: {
-                'ip': ip,
+                'user': document.cookie.split('=')[1],
                 'url': window.location.href
             }})
     }

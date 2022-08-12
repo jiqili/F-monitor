@@ -1,44 +1,42 @@
 import React from "react"
 
 export default function Err() {
-    //模拟白屏3s后加载页面
-    const [flag, setFlag] = React.useState(false);
-    React.useEffect(() => {
-        async function blankScreen() {
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    setFlag(true);
-                    resolve("hello world")
-                }, 3000);
-            }).then((res) => {
-                // console.log(res);
-            })
-        }
-        blankScreen();
-    }, []);
-    //上报自定义错误
-    function handleClick() {
-        // trace.traceError('自定义错误ID', '自定义错误message', {
-        //     src: '/interface/order',
-        //     params: {
-        //         id: '12121',
-        //     },
-        // });
+
+    function runJsError1() {
+        console.log('here')
+        let obj = {}
+        obj.a.b = 1
     }
-    if (flag) {
-        return (
-            <div className="info">
-                <h1 className="info--h1">I am error page</h1>
-                <button
-                    onClick={handleClick}
-                    className="info--button"
-                >上报自定义错误</button>
-            </div>
-        )
-    }else {
-      return (
-        <div>flag is {flag.toString()}</div>
-      )
+    function runJsError2() {
+        let foo = 1
+        foo()
     }
+    function promiseError() {
+        Promise.reject('Trigger Promise Error')
+    }
+    function consoleError() {
+        console.error('Trigger Console Error!')
+    }
+    return (
+        <div className="info">
+            <h1 className="info--h1">I am error page</h1>
+            <button
+                onClick={() => runJsError1()}
+                className="info--button"
+            >run js error 1</button>
+            <button
+                onClick={() => runJsError2()}
+                className="info--button"
+            >run js error 2</button>
+            <button
+                onClick={() => promiseError()}
+                className="info--button"
+            >promise reject</button>
+            <button
+                onClick={() => consoleError()}
+                className="info--button"
+            >console.error</button>
+        </div>
+    )
 
 }

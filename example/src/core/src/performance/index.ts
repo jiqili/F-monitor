@@ -1,7 +1,7 @@
-import {emit, emitPatch} from '../emit'
+import {emit} from '../emit'
 
 // 可容忍的最大等待首屏时间
-const MAX_WAIT_LOAD_TIME = 3000
+// const MAX_WAIT_LOAD_TIME = 3000
 
 const [perfEntries] = window.performance.getEntriesByType("navigation");
 const n = perfEntries as PerformanceNavigationTiming
@@ -59,7 +59,7 @@ const initNavigationData = () => {
 const initPaintData = () => {
   const observer = new PerformanceObserver(list => {
     for(const entry of list.getEntries()) {
-      emit({type: 'Performance', name: entry.name, data: {time: entry.startTime}})
+      emit({type: 'Performance', name: entry.name, data: {time: entry.duration}})
     }
   })
   observer.observe({entryTypes:['paint']})

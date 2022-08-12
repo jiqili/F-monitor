@@ -1,6 +1,4 @@
-import {event} from "../env"; 
-import { func } from "prop-types";
-import {uuid} from "../utils/uuid";
+import {event} from "../interface/env"; 
 import {getBrowserInfo, getPlatform} from "../utils/user";
 
 
@@ -22,8 +20,8 @@ function emitPatch(data: event[]) {
  * @param {*} data the event with type, name and data
  */
 function emit(data: event) {
+  console.log('emit', data)
   data.timeStamp = Date.now()
-  data.uuid = uuid()
   data.platform = getPlatform()
   data.browser = getBrowserInfo()
   events.push(data)
@@ -31,7 +29,6 @@ function emit(data: event) {
   events.length >= MAX_CACHE_LEN
   ? send()
   : timer = setTimeout(send, MAX_WAITING_TIME)
-  console.log(data)
 }
 
 /**

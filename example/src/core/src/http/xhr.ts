@@ -42,6 +42,7 @@ export class AjaxInterceptor {
 
     const Olesend = XMLHttpRequest.prototype.send
     XMLHttpRequest.prototype.send = function (...rest: any[]) {
+      const stack = new Error().stack
       const body = rest[0]
       const requestData: string = body
       const sendTime = Date.now() //记录发送时间
@@ -74,7 +75,7 @@ export class AjaxInterceptor {
             const errorDataLog: IHttpReqErrorRes = {
               requestMethod: this._method,
               requestUrl: this._url,
-              requestData,//请求体
+              requestData: stack,//请求体
               sendTime,
               errorType: 'httperror',//错误类型 httperror
               status: this.status //状态码
