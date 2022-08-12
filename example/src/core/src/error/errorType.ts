@@ -1,4 +1,5 @@
 //错误类型
+
 export enum TrackerEvents {
     jsError = 'jsError',
     unhandledRejection = 'unhandledRejection',
