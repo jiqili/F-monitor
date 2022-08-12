@@ -67,7 +67,7 @@ export default function MENU() {
   });
   return (
     <Menu
-      theme="dark"
+      theme="light"
       mode="inline"
       selectedKeys={[activeIndex]}
       defaultOpenKeys={['1', '2']}
