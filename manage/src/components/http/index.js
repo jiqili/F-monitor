@@ -4,7 +4,7 @@
 
 import { LineChart } from "@components/charts/lines";
 import { PieChart } from "@components/charts/pies";
-import { useFakerColorArr, useFakerLoading, useFakerNumArr, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr } from "@utils/hooks/faker";
+import { useFakerColorArr, useFakerLoading, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr } from "@utils/hooks/faker";
 
 
 /**
@@ -86,10 +86,9 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
 export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 400 }) => {
     const time = 1500, initLength = 10;
     const timeArr = useFakerOclockTimeArr(initLength, time),
-        nums = useFakerRandomNumArr(initLength, time, 2),
+        nums = useFakerRandomNumArr(initLength, time, 5),
         colors = useFakerColorArr(2),
-        isLoading = useFakerLoading(time),
-        names = ['成功', '失败'];
+        isLoading = useFakerLoading(time);
     return <LineChart
         isLoading={isLoading}
         width={width}
@@ -97,7 +96,7 @@ export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 4
         option={{
             title: {
                 left: 'center',
-                text: '实时http请求数量监控'
+                text: '这里是每种具体错误的错误代码在不同时段的数量'
             },
             tooltip: {
                 trigger: 'axis'
@@ -113,7 +112,7 @@ export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 4
                     data: value,
                     stack: 'x',
                     color: colors[index],
-                    name: `请求${names[index]}的数量`,
+                    name: `错误类型：${index}`,
                     emphasis: {
                         //高亮指定线
                         focus: 'series'
@@ -142,7 +141,8 @@ export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
         option={{
             title: {
                 left: 'center',
-                text: '异常统计'
+                text: '异常统计',
+                color:"white"
             },
             tooltip: {
                 trigger: 'item',

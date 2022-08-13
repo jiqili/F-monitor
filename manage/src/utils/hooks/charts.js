@@ -14,7 +14,7 @@ export const useInitCharts = ({ height = 400, width = 400, ...resProps }) => {
         let chart = echarts.getInstanceByDom(chartRef.current);
         if (!chart) {
             //echart初始化容器
-            chart = echarts.init(chartRef.current, null, {
+            chart = echarts.init(chartRef.current, 'dark', {
                 height, width, ...resProps
             });
         };
@@ -37,12 +37,24 @@ export const useLoadingAnamationCharts = (chartRef, isLoading = true) => {
         // return ()=>chart.hideLoading();
     }, [isLoading]);
 }
+/**
+ * 监听resize
+ */
+export const useResizeCarts=(chartRef)=>{
+    useEffect(()=>{
+        let chart = echarts.getInstanceByDom(chartRef.current);
+        const fn=()=>chart.resize();
+        window.addEventListener("resize",fn);
+        return ()=>window.removeEventListener("resize",fn);
+    },[]);
+}
 
 /**
  * 给图表加载数据,需要对数据进行封装，详见@utils/tools/datastructure
  */
 export const useOptionsCharts = (chartRef,option,isLoading=true) => {
     useLoadingAnamationCharts(chartRef,isLoading);
+    useResizeCarts(chartRef);
     useEffect(() => {
         let chart = echarts.getInstanceByDom(chartRef.current);
         !isLoading&&chart.setOption(option);

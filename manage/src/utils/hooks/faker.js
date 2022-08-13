@@ -191,3 +191,16 @@ export const useFakerRandomNumArr = (initLength = 100, time = 1000, numArrs = 1)
     }, []);
     return data;
 }
+
+/**
+ * 随机错误列表
+ */
+export const useFakerErrorList=(num)=>{
+    const [data, setData] = useState(Array.from({length:num},()=>{
+        return{
+            id:faker.database.column(),
+            errorMsg:faker.lorem.lines()
+        }
+    }));
+    return data;
+}

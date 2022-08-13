@@ -1,41 +1,27 @@
-import { LineChart } from "@components/charts/lines";
-import { useFakerYearArr,useFakerNumArr, useFakerLoading } from "@utils/hooks/faker";
-
-
+import { Col, Row, List, Checkbox, Card } from 'antd';
+import MyList from "@components/list";
+import {
+    HttpDoubleBarsChartWithDifferentTime,
+    HttpDoubleLinesChartWithDifferentTime,
+    HttpPieChartWithErrorType
+} from "@components/http";
+import { useFakerErrorList } from '@utils/hooks/faker';
 const App = () => {
-    const time=500,initLength=1000;
-    const years=useFakerYearArr(initLength,time),
-    nums=useFakerNumArr(initLength,time),
-    isLoading=useFakerLoading(time);
-    return <LineChart
-        isLoading={isLoading}
-        width={1000}
-        height={500}
-        option={{
-            visualMap: {
-                show: false,
-                type: 'continuous',
-            },
-            title: {
-                left: 'center',
-                text: 'Gradient along the y axis'
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                data: years,
-            },
-            yAxis: {},
-
-            series: {
-                type: 'line',
-                //是否显示具体数据点
-                showSymbol: false,
-                data: nums,
-            }
-        }}
-    />
+    const data=useFakerErrorList(5);
+    return (
+        <>
+            <Row>
+                <Col xs={24} lg={24}>
+                    <HttpDoubleLinesChartWithDifferentTime width={1250} height={300} />
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={24} lg={24}>
+                    <MyList data={data} />
+                </Col>
+            </Row>
+        </>
+    )
 }
 
 export default App;
