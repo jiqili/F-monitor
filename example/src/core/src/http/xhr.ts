@@ -1,15 +1,6 @@
 import { emit } from "../emit";
 import { IHttpReqErrorRes, IlogData} from "./index"
 
-
-// global.d.ts
-// interface XMLHttpRequest { 因为xml原型对象上不存在_url，要给它写个接口
-//   _url?: string;
-//   _method: string;
-//   _isUrlInIgnoreList: boolean; 判断请求是否发给监测后台，是的话则忽略监测此请求,防止死循环
-// }
-
-
 export class AjaxInterceptor {
 
   init(): void {
@@ -46,7 +37,6 @@ export class AjaxInterceptor {
       const body = rest[0]
       const requestData: string = body
       const sendTime = Date.now() //记录发送时间
-
       this.addEventListener("readystatechange", function () {
         if (this._isUrlInIgnoreList){
           return //跳过发送给监测系统的请求
@@ -54,7 +44,6 @@ export class AjaxInterceptor {
         
         if (this.readyState === 4 ) {//当state为4,所有相应数据接收完毕
           if (this.status >=200 && this.status < 300) {//请求成功
-            
             const successDataLog: IlogData = {
               duration: Date.now() - sendTime,
               requestUrl: this.responseURL,
@@ -71,7 +60,6 @@ export class AjaxInterceptor {
               data: successDataLog,
             })
           } else {//请求失败
-            
             const errorDataLog: IHttpReqErrorRes = {
               requestMethod: this._method,
               requestUrl: this._url,

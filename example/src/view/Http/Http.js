@@ -52,13 +52,9 @@ export default function Http() {
         if (xhr.status === 200) {
           console.log(xhr.responseText);
         } else {
-          console.error(xhr.statusText);
           setNotFoundData(xhr.statusText)
         }
       }
-    };
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
     };
     xhr.send(null);
   }
@@ -72,13 +68,9 @@ export default function Http() {
         if (xhr.status === 200) {
           console.log(xhr.responseText);
         } else {
-          console.error(xhr.statusText);
           setInternalServerError(xhr.statusText)
         }
       }
-    };
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
     };
     xhr.send(null);
   }
@@ -97,10 +89,7 @@ export default function Http() {
   }
   //fetch success
   async function handleFetch() {
-    const response = await fetch('http://localhost:8080/cookie', {
-      method: 'GET', 
-      credentials: 'include'
-    });
+    const response = await fetch('http://localhost:8080/fetch');
     const data = await response.json();
     setFetchData(data.data);
   }

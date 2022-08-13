@@ -27,7 +27,7 @@ export interface ConsoleErrorInfo {
 }
 export interface ResourceErrorInfo {
     type: 'Error'
-    name: 'Resoure Error'
+    name: 'Resource Error'
     data: {
         reason: string
         url: string

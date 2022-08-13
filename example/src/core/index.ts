@@ -1,5 +1,5 @@
 import './src/performance/index';
-
+import './src/http/index'
 import { initPerformance } from './src/performance';
 import { initUser } from './src/user';
 import { ErrorInterceptor } from './src/error';
