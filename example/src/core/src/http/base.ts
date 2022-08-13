@@ -10,7 +10,6 @@
   timeStamp?: number //当前上报时间
   sendTime: number | undefined
   stack: any
-  errorType: string | undefined //错误类型 js、promise、http等
   errorMsg?: string | undefined //错误信息
   status?: number //状态码
 }
@@ -22,9 +21,7 @@ export interface IlogData {//请求成功-上报数据接口
   timeStamp?: number //当前时间
   duration?: number //持续时间
   sendTime?: number
-  response?: any //响应体
-  context?: any //请求参数
-  status?: number //状态码
+  status: number //状态码
 }
 
 

@@ -35,7 +35,6 @@ export class FetchInterceptor extends BaseInterceptor {
                   sendTime,
                   requestMethod: this._method,
                   requestData: this._data,
-                  response: res,
                   duration: Date.now() - sendTime,
                 } 
                 // console.log(successDataLog)
@@ -45,7 +44,7 @@ export class FetchInterceptor extends BaseInterceptor {
                   requestUrl: this._url,
                   requestData: this._data,
                   errorMsg: res.statusText,
-                  errorType: 'httperror',
+                  status:res.status,
                   sendTime,
                   stack,
                 }
@@ -74,9 +73,8 @@ export class FetchInterceptor extends BaseInterceptor {
                   requestUrl: this._url,
                   requestData: this._data,
                   sendTime,
-                  stack,
+                  stack:e.stack,
                   errorMsg: e.message,
-                  errorType: 'httperror'
                 };
 
                 if (!this._isUrlInIgnoreList) {

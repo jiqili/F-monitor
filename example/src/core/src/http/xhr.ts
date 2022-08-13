@@ -49,7 +49,6 @@ export class AjaxInterceptor extends BaseInterceptor {
               sendTime,
               requestMethod: this._method,
               requestData,
-              response: this.response,
               status: this.status
             }
             console.log(successDataLog) 
@@ -65,7 +64,6 @@ export class AjaxInterceptor extends BaseInterceptor {
               requestData,//请求体
               stack,
               sendTime,
-              errorType: 'httperror',//错误类型 httperror
               status: this.status //状态码
             }
             console.log(errorDataLog) 
