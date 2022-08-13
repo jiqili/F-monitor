@@ -1,27 +1,26 @@
 import { emit } from "../emit";
-import { IHttpReqErrorRes, IlogData} from "./index"
+import { IHttpReqErrorRes, IlogData, inoreTYPE, BaseInterceptor} from "./base"
 
-export class AjaxInterceptor {
+
+export class AjaxInterceptor extends BaseInterceptor {
+
+  constructor(ignoreList?: inoreTYPE){
+    super(ignoreList)
+  }
 
   init(): void {
     if (!XMLHttpRequest) return ; //XML不存在则返回  看浏览器兼容性
     const Oldopen = XMLHttpRequest.prototype.open
+    const self = this //self为类实例
 
     XMLHttpRequest.prototype.open = function(//劫持open方法
       method: string,
       url: string | URL,
       async?: boolean
     ){
-      //在global.d.ts 加接口，给XMLHttpRequest添加属性_url,不然会提示xml上不存在_url
       this._url = typeof url === 'string' ? url : url.href
       this._method = method
-      if(!this._url.match(/jiancexitong/) && !this._url.match(/sockjs/))//防止死循环
-      {
-        this._isUrlInIgnoreList = false
-      }
-      else{
-        this._isUrlInIgnoreList = true
-      }
+      this._isUrlInIgnoreList=self.isUrlInIgnoreList(this._url)//是否需要过滤，防止死循环
 
       return Oldopen.call(
         this,
@@ -63,7 +62,8 @@ export class AjaxInterceptor {
             const errorDataLog: IHttpReqErrorRes = {
               requestMethod: this._method,
               requestUrl: this._url,
-              requestData: stack,//请求体
+              requestData,//请求体
+              stack,
               sendTime,
               errorType: 'httperror',//错误类型 httperror
               status: this.status //状态码
