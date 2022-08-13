@@ -11,7 +11,7 @@ export enum ErrorType {
     jsError = 'jsError',
     resourceError = 'resourceError',
     httpError = 'httpError',
-    unhandledRejection = 'unhandledRejection'
+    unhandledRejectionError = 'unhandledRejectionError'
 }
 
 export interface BaseError {
@@ -19,4 +19,14 @@ export interface BaseError {
     url?: String | undefined
     path?: String | undefined
     context?: any
+}
+export interface IError extends BaseError {
+    msg: string | Event
+    line: number | undefined
+    column: number | undefined
+    stackTrace: string
+}
+
+export interface IUnHandleRejectionError extends BaseError {
+    msg: string
 }

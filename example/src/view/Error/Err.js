@@ -25,6 +25,14 @@ export default function Err() {
         //     },
         // });
     }
+    function jsError() {
+        throw new Error('jsError')
+    }
+    function promiseError() {
+        new Promise((resolve, reject) => {
+            reject('something wrong')
+        })
+    }
     function onLoadImageError() {
         const image = document.createElement('img')
         image.setAttribute('src', '/img/undefined.png')
@@ -38,6 +46,8 @@ export default function Err() {
                 <button onClick={handleClick} className="info--button">
                     上报自定义错误
                 </button>
+                <button onClick={jsError}>jsError</button>
+                <button onClick={promiseError}>promiseError</button>
                 {/* <button onClick={onLoadJsError}>load js error</button>
                 <button onClick={onLoadCssError}>load css error</button> */}
                 <button onClick={onLoadImageError}>load image error</button>
