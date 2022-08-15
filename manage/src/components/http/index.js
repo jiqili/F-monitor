@@ -3,8 +3,9 @@
  */
 
 import Chart from "@components/charts";
-import { useFakerColorArr, useFakerLoading, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr, useFakerRandomNumArrByOclock } from "@utils/hooks/faker";
-
+import { useFakerColorArr, useFakerLoading, useFakerOclockTimeArrByOrder, useFakerRandomNumArrByOclock } from "@utils/hooks/faker";
+import { useFakerNumArrByOrderLen } from "@utils/hooks";
+import { errorType, useGetErrorData, waitTime } from "src/store";
 
 /**
  * 在不同时段请求成功和请求错误的双条形图--bar
@@ -12,9 +13,9 @@ import { useFakerColorArr, useFakerLoading, useFakerNumArrByOrderLen, useFakerOc
 
 export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 400 }) => {
     const time = 1000, initLength = 4;
-    const timeArr = useFakerOclockTimeArrByOrder(initLength, time*3),
-        successArr=useFakerNumArrByOrderLen(initLength,time*3),
-        errorArr=useFakerNumArrByOrderLen(initLength,time*3),
+    const timeArr = useFakerOclockTimeArrByOrder(initLength, time * 3),
+        successArr = useFakerNumArrByOrderLen(initLength, time * 3),
+        errorArr = useFakerNumArrByOrderLen(initLength, time * 3),
         colors = useFakerColorArr(2),
         isLoading = useFakerLoading(time),
         names = ['成功', '失败'];
@@ -38,14 +39,14 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
             tooltip: {
                 trigger: 'axis'
             },
-            series:[
+            series: [
                 {
                     // realtimeSort: true,
                     type: 'bar',
                     data: successArr,
                     label: {
                         show: true,
-                        position:'right',
+                        position: 'right',
                         valueAnimation: true
                     },
                     color: colors[0],
@@ -61,7 +62,7 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
                     data: errorArr,
                     label: {
                         show: true,
-                        position:'right',
+                        position: 'right',
                         valueAnimation: true
                     },
                     color: colors[1],
@@ -82,7 +83,7 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
 /**
  * 在不同时段请求成功和请求错误多条形折线图
  */
-export const HttpLinesChartWithDifferentTime = ({ width = 1000, height = 400,Linenums=2 }) => {
+export const HttpLinesChartWithDifferentTime = ({ width = 1000, height = 400, Linenums = 2 }) => {
     const time = 1500, initLength = 10;
     const timeArr = useFakerOclockTimeArrByOrder(initLength, time),
         nums = useFakerRandomNumArrByOclock(initLength, time, Linenums),
@@ -129,26 +130,22 @@ export const HttpLinesChartWithDifferentTime = ({ width = 1000, height = 400,Lin
 /**
  * http请求错误类型的饼状图
  */
-export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
-    const time = 1500, initLength = 6;
-    const data = useFakerNumArrByOrderLen(initLength, time),
-        isLoading = useFakerLoading(time),
-        names = ['js异常', 'vue异常', 'promise异常', 'react异常', '请求错误异常', '未定义异常'];
+export const HttpPieChartWithErrorType = ({ height = 500 }) => {
 
+    const data = useGetErrorData('all'),
+        isLoading = useFakerLoading(waitTime);
     return <Chart
         isLoading={isLoading}
-        width={width}
         height={height}
-        autoResize={true}
         option={{
             title: {
                 left: 'center',
                 text: '异常统计',
-                color:"white"
+                color: "white"
             },
             tooltip: {
                 trigger: 'item',
-                formatter:`{b}<br/>{c}条，占比{d}%`
+                formatter: `{b}<br/>{c}条，占比{d}%`
             },
             series: {
                 type: 'pie',
@@ -159,14 +156,14 @@ export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
                 itemStyle: {
                     borderRadius: 10,
                 },
-                data:data.map((value,index)=>{
-                    return{
+                data: data.map((value, index) => {
+                    return {
                         value,
-                        name:names[index],
-                       label:{
-                        fontSize:16,
-                        fontWeight:'bold'
-                       }
+                        name: errorType[index],
+                        label: {
+                            fontSize: 16,
+                            fontWeight: 'bold'
+                        }
                     }
                 })
             }

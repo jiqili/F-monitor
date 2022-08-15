@@ -16,7 +16,6 @@ const App = () => {
             <Row>
                 <Col xs={24} lg={24}>
                     <_List data={data} />
-
                 </Col>
             </Row>
         </>

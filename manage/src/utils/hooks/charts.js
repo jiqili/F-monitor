@@ -9,19 +9,13 @@ import { debounce } from "@utils/tools";
 /**
  * 初始化图表，组件销毁时附带销毁图表，返回需要需要挂载的ref
  */
-export const useInitCharts = ({ height = 400, width = 400, autoResize = false, ...resProps }) => {
+export const useInitCharts = (option) => {
     const chartRef = useRef(null);
     useEffect(() => {
         let chart = echarts.getInstanceByDom(chartRef.current);
         if (!chart) {
             //echart初始化容器
-            if (autoResize) {
-                chart = echarts.init(chartRef.current, 'dark');
-            } else {
-                chart = echarts.init(chartRef.current, 'dark', {
-                    height, width, ...resProps
-                });
-            }
+            chart = echarts.init(chartRef.current, 'dark',option);
         };
         return () => chart.dispose();
     }, []);
@@ -41,7 +35,7 @@ export const useLoadingAnamationCharts = (chartRef, isLoading = true) => {
                     text: 'loading',
                     maskColor: 'rgb(16,12,42)',
                     textColor: 'white',
-                    fontSize:20,
+                    fontSize: 20,
                 });
         }
         else chart.hideLoading();

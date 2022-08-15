@@ -1,12 +1,15 @@
 import '@styles/globals.css';
 import 'antd/dist/antd.css';
 import Layout from '@components/layout';
+import DataProvider from 'src/store';
 function MyApp({ Component, pageProps }) {
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <DataProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </DataProvider>
   )
 }
 
