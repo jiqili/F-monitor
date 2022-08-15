@@ -1,7 +1,8 @@
 .listItem {
     padding: 5px 0;
 }
-.listItem p{
+
+.listItem p {
     margin: 0;
 }
 
@@ -25,8 +26,14 @@
 .card_errorType>* {
     padding: 0 5px;
 }
-.card_errorType>div:nth-of-type(3){
-    color:red;
+
+.card_errorType>div:nth-of-type(3) {
+    color: red;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
 }
 
 .first_box {
