@@ -1,15 +1,19 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Err from "./view/Error/Err"
 import Event from "./view/Action/Action"
-import Http from "./view/Http/Http";
+import Http from "./view/Http/Http"
 import './App.css'
-import './core/index'
+import {ReactBoundary} from'./core/index' //如要使用react捕获，在需要捕获的组件用ReactBoundary包裹即可
+// import './core/index'   不需要使用react捕获直接引入
+import {BuggyCounter} from "./view/Error/ReactbugCounter"
+
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/err" element={<Err />}></Route>
+        <Route path="/err" element={<ReactBoundary> <Err /> <BuggyCounter /> </ReactBoundary>}></Route>
         <Route path="/event" element={<Event />}></Route>
         <Route path="/http" element={<Http />}></Route>
       </Routes>
