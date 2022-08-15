@@ -33,8 +33,8 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
     '/',
     [
       '/errorJs',
-      '/errorJs',
-      '/errorJs',
+      '/errorResource',
+      '/errorHttpRequest',
     ],
     [
       '/realtimebar',
@@ -57,11 +57,11 @@ export default function MENU() {
         return {
           'label': label,
           'key': `${index}.${secIndex}`,
-          'onClick': handlerClick.bind(null,setActiveIndex,`${index}.${secIndex}`, router, array[secIndex]),
+          'onClick': handlerClick.bind(null, setActiveIndex, `${index}.${secIndex}`, router, array[secIndex]),
         }
       })
     } else {
-      obj['onClick'] = handlerClick.bind(null, setActiveIndex,`${index}`,router, __routerArray[index]);
+      obj['onClick'] = handlerClick.bind(null, setActiveIndex, `${index}`, router, __routerArray[index]);
     }
     return obj;
   });

@@ -1,0 +1,39 @@
+.listItem {
+    padding: 5px 0;
+}
+.listItem p{
+    margin: 0;
+}
+
+.card {
+    width: 100%;
+}
+
+.card>div:first-child {
+    padding: 10px 5px;
+}
+
+.card_errorType {
+    display: grid;
+    grid-template-columns: 200px 200px 1fr 200px;
+    grid-column-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    grid-auto-rows: 50px;
+}
+
+.card_errorType>* {
+    padding: 0 5px;
+}
+.card_errorType>div:nth-of-type(3){
+    color:red;
+}
+
+.first_box {
+    display: flex;
+    justify-self: normal;
+}
+
+.first_box>*:not(:first-child) {
+    padding: 0 5px;
+}
