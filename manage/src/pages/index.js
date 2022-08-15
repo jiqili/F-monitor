@@ -15,12 +15,12 @@ export default function Index() {
     setHeight(leftRef.current.offsetHeight);
   }, [leftRef || leftRef.current.offsetHeight]);
   return (
-    <>
+    <div className={styles.Wrapper}>
       <Row gutter={8} align={'bottom'}>
         {/* 异常统计图 */}
         <Col xs={24} lg={24} xl={13} style={{ backgroundColor: 'rgb(16,12,42)', }}>
           {/* <Card hasMoreButton={false}> */}
-            <HttpPieChartWithErrorType width={645} height={height} />
+          <HttpPieChartWithErrorType width={645} height={height} />
           {/* </Card> */}
         </Col>
 
@@ -59,20 +59,32 @@ export default function Index() {
         style={{ marginTop: "16px" }}
         gutter={8}>
         {/* 下层详情 */}
-        <Col xs={24} lg={6}>
-          <Card title="资源请求错误">1</Card>
-        </Col>
-        <Col xs={24} lg={6}>
-          <Card title="资源请求错误">1</Card>
-        </Col>
-        <Col xs={24} lg={6}>
-          <Card title="资源请求错误">1</Card>
-        </Col>
-        <Col xs={24} lg={6}>
-          <Card title="资源请求错误">1</Card>
-        </Col>
+        <BottomCard
+          title="当前UV数"
+          cur={`今日：234`}
+          old={`昨日：120`}
+          href={'/'}
+        />
+        <BottomCard
+          title="当前PV数"
+          cur={`今日：234`}
+          old={`昨日：120`}
+          href={'/'}
+        />
+        <BottomCard 
+        title="使用占比最大的浏览器"
+        cur={`chrome：79%`}
+        old={`firefox：13%`}
+        href={'/'}
+        />
+        <BottomCard 
+        title="用户浏览最多次数的页面"
+        cur={`首页`}
+        old={`个人页面`}
+        href={'/'}
+        />
       </Row>
-    </>
+    </div>
   )
 }
 
@@ -87,5 +99,19 @@ const LeftCard = ({ title, bordered = false, num = 0, msg = '' }) => {
         <p><span>{msg}</span></p>
       </div>
     </Card>
+  )
+}
+
+
+const BottomCard = ({ title, cur, old, href = '/' }) => {
+  return (
+    <Col xs={24} lg={6}>
+      <Card title={title} href={href}>
+        <div className={styles.BottomCard}>
+          <p>{cur}</p>
+          <p>{old}</p>
+        </div>
+      </Card>
+    </Col>
   )
 }

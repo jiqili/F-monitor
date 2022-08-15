@@ -1,4 +1,10 @@
 /* 这里放index.js页面的样式规则 */
+
+
+
+.Wrapper p:hover{
+    color: black;
+  }
 .right_two_card {
     height: 100px;
     display: flex;
@@ -14,8 +20,9 @@
     color: grey;
     grid-template-columns: 250px 1fr;
 }
-.right_one_card>p:last-child{
-    margin:0 10px;
+
+.right_one_card>p:last-child {
+    margin: 0 10px;
     font-size: 18px;
     text-align: center;
 }
@@ -26,3 +33,14 @@
     margin: 0;
     text-align: center;
 }
+
+
+.BottomCard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: grey;
+}
+
