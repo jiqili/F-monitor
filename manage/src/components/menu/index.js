@@ -10,7 +10,7 @@ const Menu = dynamic(() => import('antd').then(mod => mod.Menu), { ssr: false })
 
 
 
-const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
+export const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
   __ItemChildrens = [
     null,
     [
@@ -37,9 +37,9 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
       '/errorHttpRequest',
     ],
     [
-      '/realtimebar',
-      '/',
-      '/'
+      '/performanceHttpRequest',
+      '/performanceResource',
+      '/performancePage'
     ]
   ];
 export default function MENU() {
