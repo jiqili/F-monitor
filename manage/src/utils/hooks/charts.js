@@ -5,6 +5,7 @@
  */
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
+import {debounce} from "@utils/tools";
 /**
  * 初始化图表，组件销毁时附带销毁图表，返回需要需要挂载的ref
  */
@@ -46,7 +47,7 @@ export const useLoadingAnamationCharts = (chartRef, isLoading = true) => {
 export const useResizeCarts = (chartRef) => {
     useEffect(() => {
         let chart = echarts.getInstanceByDom(chartRef.current);
-        const fn = () => { console.log('resize'); chart.resize() };
+        const fn=debounce(chart.resize,50);
         window.addEventListener("resize", fn);
         return () => window.removeEventListener("resize", fn);
     }, []);

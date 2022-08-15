@@ -2,22 +2,30 @@ import { Col, Row } from 'antd';
 import Card from "@components/card";
 import { HttpPieChartWithErrorType } from "@components/http";
 import styles from "./css/index.module.css";
+import { useEffect, useRef, useState } from 'react';
 /**
  * 对应首页路由
  * 在这里打算采取Zendenta的首页模式
  */
 
 export default function Index() {
+  const leftRef = useRef(null);
+  const [height, setHeight] = useState(450);
+  useEffect(() => {
+    setHeight(leftRef.current.offsetHeight);
+  }, [leftRef||leftRef.current.offsetHeight]);
   return (
     <>
-      <Row gutter={8}>
+      <Row gutter={8} align={'bottom'}>
         {/* 异常统计图 */}
         <Col xs={24} lg={24} xl={13}>
           <Card hasMoreButton={false}>
-            <HttpPieChartWithErrorType width={645} height={450} />
+            <HttpPieChartWithErrorType width={645} height={height-48} />
           </Card>
         </Col>
-        <Col xs={24} lg={24} xl={11}>
+
+        <Col xs={24} lg={24} xl={11} ref={leftRef}>
+          {/* 这里是右边的两个错误展示card */}
           <Row gutter={4}>
             <Col span={12} >
               <LeftCard
@@ -34,6 +42,7 @@ export default function Index() {
               />
             </Col>
           </Row>
+          {/* 这里是右边下面的card */}
           <Row style={{ marginTop: "4px" }}>
             <Col span={24}>
               <Card title="这里可以展示性能指标" bordered={false}>

@@ -1,7 +1,8 @@
 import styles from "./card.module.css";
 import { Card } from 'antd';
-import More from "@components/more";
-export default function _Card({ title, href, children,hasMoreButton=true, ...resProps }) {
+import { RightOutlined } from '@ant-design/icons';
+import Link from "next/link";
+export default function _Card({ title, href, children, hasMoreButton = true, ...resProps }) {
     return (
         <Card
             title={title}
@@ -9,7 +10,22 @@ export default function _Card({ title, href, children,hasMoreButton=true, ...res
             {...resProps}
         >
             {children}
-            {hasMoreButton&&<More message={"查看详情"} href={href} />}
+            {hasMoreButton && <More message={"查看详情"} href={href} />}
         </Card>
+    )
+}
+
+function More({ message, href }) {
+    return (
+        <div className={styles.moreWrapper}>
+            <p>
+                {message}
+            </p>
+            <button className={styles.moreButton}>
+                <Link href={href || '/'}>
+                    <RightOutlined />
+                </Link>
+            </button>
+        </div>
     )
 }
