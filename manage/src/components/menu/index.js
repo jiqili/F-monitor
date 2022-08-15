@@ -32,9 +32,9 @@ const __menuItemArray = ['首页概览', '异常与事件', '性能与访问'],
   __routerArray = [
     '/',
     [
-      '/gradienttest',
-      '/gradienttest',
-      '/gradienttest',
+      '/errorJs',
+      '/errorJs',
+      '/errorJs',
     ],
     [
       '/realtimebar',

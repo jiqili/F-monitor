@@ -2,9 +2,8 @@
  * 这里放展示有关http数据的组件
  */
 
-import { LineChart } from "@components/charts/lines";
-import { PieChart } from "@components/charts/pies";
-import { useFakerColorArr, useFakerLoading, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr } from "@utils/hooks/faker";
+import Chart from "@components/charts";
+import { useFakerColorArr, useFakerLoading, useFakerNumArrByOrderLen, useFakerOclockTimeArr, useFakerOclockTimeArrByOrder, useFakerRandomNumArr, useFakerRandomNumArrByOclock } from "@utils/hooks/faker";
 
 
 /**
@@ -19,7 +18,7 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
         colors = useFakerColorArr(2),
         isLoading = useFakerLoading(time),
         names = ['成功', '失败'];
-    return <LineChart
+    return <Chart
         isLoading={isLoading}
         width={width}
         height={height}
@@ -81,18 +80,19 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
     />
 }
 /**
- * 在不同时段请求成功和请求错误双条形折线图
+ * 在不同时段请求成功和请求错误多条形折线图
  */
-export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 400 }) => {
+export const HttpLinesChartWithDifferentTime = ({ width = 1000, height = 400,Linenums=2 }) => {
     const time = 1500, initLength = 10;
-    const timeArr = useFakerOclockTimeArr(initLength, time),
-        nums = useFakerRandomNumArr(initLength, time, 5),
+    const timeArr = useFakerOclockTimeArrByOrder(initLength, time),
+        nums = useFakerRandomNumArrByOclock(initLength, time, Linenums),
         colors = useFakerColorArr(2),
         isLoading = useFakerLoading(time);
-    return <LineChart
+    return <Chart
         isLoading={isLoading}
         width={width}
         height={height}
+        autoResize={true}
         option={{
             title: {
                 left: 'center',
@@ -117,6 +117,7 @@ export const HttpDoubleLinesChartWithDifferentTime = ({ width = 1000, height = 4
                         //高亮指定线
                         focus: 'series'
                     },
+                    smooth: true,
                 };
             }),
         }}
@@ -134,7 +135,7 @@ export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
         isLoading = useFakerLoading(time),
         names = ['js异常', 'vue异常', 'promise异常', 'react异常', '请求错误异常', '未定义异常'];
 
-    return <PieChart
+    return <Chart
         isLoading={isLoading}
         width={width}
         height={height}

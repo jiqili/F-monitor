@@ -193,13 +193,47 @@ export const useFakerRandomNumArr = (initLength = 100, time = 1000, numArrs = 1)
 }
 
 /**
+ * 固定长度随机数组数组
+ */
+export const useFakerRandomNumArrByOclock= (initLength = 100, time = 1000, numArrs = 1) => {
+    const is2DArray = numArrs > 1,
+        initArray = Array.from({ length: is2DArray ? numArrs : initLength }, () => {
+            if (is2DArray) {
+                return Array.from({ length: initLength }, () => faker.datatype.number({ min: 0, max: 100, precision: 5 }));
+            } else {
+                return faker.datatype.number({ min: 0, max: 100, precision: 5 });
+            }
+        });
+
+    const [data, setData] = useState(initArray);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setData((data) => {
+                if (is2DArray) {
+                    const arr=data.map(arr => [...arr, faker.datatype.number({ min: 0, max: 100, precision: 5 })]);
+                    
+                    return arr.map(list=>list.slice(1));
+                } else {
+                    const arr=[...data, faker.datatype.number({ min: 0, max: 100, precision: 5 })];
+                    arr.unshift();
+                    return arr.map(list=>list.slice(1));
+                }
+            });
+        }, time);
+        return () => clearInterval(timer);
+    }, []);
+    return data;
+}
+
+
+/**
  * 随机错误列表
  */
-export const useFakerErrorList=(num)=>{
-    const [data, setData] = useState(Array.from({length:num},()=>{
-        return{
-            id:faker.database.column(),
-            errorMsg:faker.lorem.lines()
+export const useFakerErrorList = (num) => {
+    const [data, setData] = useState(Array.from({ length: num }, () => {
+        return {
+            id: faker.database.column(),
+            errorMsg: faker.lorem.lines()
         }
     }));
     return data;
