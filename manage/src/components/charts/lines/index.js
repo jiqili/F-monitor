@@ -1,6 +1,3 @@
-// export {default as NormalLineChart} from "./normalLineChart";
-// export {default as SmoothLineChart} from "./smoothLineChart";
-
 import { useInitCharts, useOptionsCharts } from "@utils/hooks/charts";
 export const LineChart=(props)=>{
     const {  isLoading=false,width = 400, height = 400, option={},...resProps } = props;

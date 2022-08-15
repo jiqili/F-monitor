@@ -1,0 +1,14 @@
+/* 这里放index.js页面的样式规则 */
+.right_two_card {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    flex-flow: column nowrap;
+}
+
+.right_two_card_font_p {
+    font-size: 50px;
+    margin: 0;
+}

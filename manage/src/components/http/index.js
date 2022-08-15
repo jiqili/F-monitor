@@ -138,6 +138,7 @@ export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
         isLoading={isLoading}
         width={width}
         height={height}
+        autoResize={true}
         option={{
             title: {
                 left: 'center',
