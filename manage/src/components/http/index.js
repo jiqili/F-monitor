@@ -151,17 +151,21 @@ export const HttpPieChartWithErrorType = ({ width = 1000, height = 500 }) => {
             },
             series: {
                 type: 'pie',
-                radius: [50, 250],
+                radius: [50, 210],
                 selectedMode: 'single',
-                center: ['50%', '50%'],
+                center: ['50%', '55%'],
                 roseType: 'area',
                 itemStyle: {
-                    borderRadius: 8
+                    borderRadius: 10,
                 },
                 data:data.map((value,index)=>{
                     return{
                         value,
-                        name:names[index]
+                        name:names[index],
+                       label:{
+                        fontSize:16,
+                        fontWeight:'bold'
+                       }
                     }
                 })
             }

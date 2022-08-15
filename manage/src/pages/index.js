@@ -13,15 +13,15 @@ export default function Index() {
   const [height, setHeight] = useState(450);
   useEffect(() => {
     setHeight(leftRef.current.offsetHeight);
-  }, [leftRef||leftRef.current.offsetHeight]);
+  }, [leftRef || leftRef.current.offsetHeight]);
   return (
     <>
       <Row gutter={8} align={'bottom'}>
         {/* 异常统计图 */}
-        <Col xs={24} lg={24} xl={13}>
-          <Card hasMoreButton={false}>
-            <HttpPieChartWithErrorType width={645} height={height-48} />
-          </Card>
+        <Col xs={24} lg={24} xl={13} style={{ backgroundColor: 'rgb(16,12,42)', }}>
+          {/* <Card hasMoreButton={false}> */}
+            <HttpPieChartWithErrorType width={645} height={height} />
+          {/* </Card> */}
         </Col>
 
         <Col xs={24} lg={24} xl={11} ref={leftRef}>
