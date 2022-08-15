@@ -8,7 +8,21 @@
     flex-flow: column nowrap;
 }
 
+
+.right_one_card {
+    display: grid;
+    color: grey;
+    grid-template-columns: 250px 1fr;
+}
+.right_one_card>p:last-child{
+    margin:0 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.right_one_card>p:first-child,
 .right_two_card_font_p {
     font-size: 50px;
     margin: 0;
+    text-align: center;
 }

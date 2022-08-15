@@ -45,8 +45,11 @@ export default function Index() {
           {/* 这里是右边下面的card */}
           <Row style={{ marginTop: "4px" }}>
             <Col span={24}>
-              <Card title="这里可以展示性能指标" bordered={false}>
-                <p>性能相比于异常优先级较低，在这里展示一些关键数据然后点击下面的按钮或者左边进入详情页面</p>
+              <Card title="http请求异常" bordered={false}>
+                <div className={styles.right_one_card}>
+                  <p><span>20</span></p>
+                  <p>其中404请求错误最多，为7个</p>
+                </div>
               </Card>
             </Col>
           </Row>
