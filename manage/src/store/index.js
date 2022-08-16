@@ -48,10 +48,15 @@ export const errorHttpUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
     errorHttpTypes = UseFakerRandomIndexArr(errorUrlsLen, HTTPERRORTYPES);
 
 
+const USERPERFORMANCE = ['pv', 'uv'];
+
+const PERFORMANCETYPE=['fp','fcp','domReady'];
+
 const DataProvider = ({ children }) => {
     const errorArray = useFakerNumArrByOrderLen(errorType.length, Fetchtime);
+    const userArray = useFakerNumArrByOrderLen(USERPERFORMANCE.length, Fetchtime);
     return (
-        <dataContext.Provider value={{ errorArray }}>
+        <dataContext.Provider value={{ errorArray, userArray }}>
             {children}
         </dataContext.Provider>
     )
@@ -67,4 +72,11 @@ export default DataProvider;
 export const useGetErrorData = (errortype) => {
     const { errorArray } = useContext(dataContext);
     return errorType.includes(errortype) ? errorArray[errorType.indexOf(errortype)] : errorArray;
+}
+/**
+ * 获取uv，pv
+ */
+export const useGetUserData = (usertype) => {
+    const { userArray } = useContext(dataContext);
+    return USERPERFORMANCE.includes(usertype) ? userArray[errorType.indexOf(usertype)] : userArray;
 }

@@ -49,9 +49,9 @@ export const useLoadingAnamationCharts = (chartRef, isLoading = true, isDark = t
 export const useResizeCarts = (chartRef) => {
     useEffect(() => {
         let chart = echarts.getInstanceByDom(chartRef.current);
-        const fn = debounce(chart.resize, 50);
-        window.addEventListener("resize", fn);
-        return () => window.removeEventListener("resize", fn);
+        // const fn = debounce(chart.resize, 50);
+        window.addEventListener("resize", chart.resize);
+        return () => window.removeEventListener("resize", chart.resize);
     }, []);
 }
 
