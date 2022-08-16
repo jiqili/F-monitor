@@ -1,16 +1,20 @@
-import { Col, Row} from 'antd';
+import { Col, Row } from 'antd';
 import { HttpLinesChartWithDifferentTime } from "@components/http";
-import { useFakerErrorList } from '@utils/hooks/faker';
 import _List from '@components/errorList';
-
+import { errorUrlsLen, errorResourceUrls, errorResourceTypes } from 'src/store';
 const App = () => {
-    const nums = 5;
-    const data = useFakerErrorList(nums);
+    const data = Array.from({ length: errorUrlsLen }, (_, index) => {
+        return {
+            errorType: errorResourceTypes[index],
+            errorUrl: errorResourceUrls[index],
+            errorReason: '还没写'
+        }
+    })
     return (
         <>
             <Row>
                 <Col xs={24} lg={24}>
-                    <HttpLinesChartWithDifferentTime width={1250} height={300} Linenums={nums} />
+                    <HttpLinesChartWithDifferentTime height={300} initLength={12} errorType='resourceError' />
                 </Col>
             </Row>
             <Row>

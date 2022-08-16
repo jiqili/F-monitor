@@ -24,7 +24,9 @@ export const Fetchtime = 5000;
 export const host = `http:127.0.0.1:80`;
 
 
-const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'];
+const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'],
+    RESOURCEERRORTYPES = ['Script Load Error', 'Image Load Error'],
+    HTTPERRORTYPES = ['Not Found', 'Internal Server Error'];
 
 /**
  * js错误
@@ -32,6 +34,18 @@ const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'
 export const errorUrlsLen = 15,
     errorJsUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
     errorJsTypes = UseFakerRandomIndexArr(errorUrlsLen, JSERRORTYPES);
+
+/**
+ * resource错误
+ */
+export const errorResourceUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
+    errorResourceTypes = UseFakerRandomIndexArr(errorUrlsLen, RESOURCEERRORTYPES);
+
+/**
+ * http请求错误
+ */
+export const errorHttpUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
+    errorHttpTypes = UseFakerRandomIndexArr(errorUrlsLen, HTTPERRORTYPES);
 
 
 const DataProvider = ({ children }) => {
