@@ -24,7 +24,7 @@
 .card_errorType>* {
     padding: 0 5px;
     display: grid;
-    grid-template-columns: minmax(100px,200px) 1fr;
+    grid-template-columns: minmax(100px,300px) 1fr;
     justify-content: center;
     align-items: center;
 }

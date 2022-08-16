@@ -29,24 +29,25 @@ export default function Index() {
               <LeftCard
                 title="异常总数"
                 msg={'all'}
+                href={'/errorJs'}
               />
             </Col>
             <Col span={12}>
               <LeftCard
                 title={"资源请求错误"}
                 msg={'资源请求错误'}
+                href={'/errorResource'}
               />
             </Col>
           </Row>
           {/* 这里是右边下面的card */}
           <Row style={{ marginTop: "4px" }}>
             <Col span={24}>
-              <Card title="http请求异常" bordered={false}>
-                <div className={styles.right_one_card}>
-                  <p><span>20</span></p>
-                  <p>其中404请求错误最多，为7个</p>
-                </div>
-              </Card>
+              <RightCard
+                title="http请求异常"
+                msg="http请求异常"
+                href={'/errorHttpRequest'}
+              />
             </Col>
           </Row>
         </Col>
@@ -71,20 +72,20 @@ export default function Index() {
           title="使用占比最大的浏览器"
           cur={`chrome：79%`}
           old={`firefox：13%`}
-          href={'/'}
+          href={'/performancePage'}
         />
         <BottomCard
           title="用户浏览最多次数的页面"
           cur={`首页`}
           old={`个人页面`}
-          href={'/'}
+          href={'/performancePage'}
         />
       </Row>
     </div>
   )
 }
 
-const RightCard = ({ title, msg = 'all' }) => {
+const RightCard = ({ title, href = '/', msg = 'all' }) => {
   let sum = useGetErrorData(msg);
   if (Array.isArray(sum)) {
     sum = sum.reduce((a, b) => a + b);
@@ -100,13 +101,13 @@ const RightCard = ({ title, msg = 'all' }) => {
 }
 
 
-const LeftCard = ({ title, bordered = false, msg = 'all' }) => {
+const LeftCard = ({ title, href = '/', msg = 'all' }) => {
   let sum = useGetErrorData(msg);
   if (Array.isArray(sum)) {
     sum = sum.reduce((a, b) => a + b);
   }
   return (
-    <Card title={title} bordered={bordered}>
+    <Card title={title} bordered={false} href={href}>
       <div className={styles.right_two_card}>
         <p className={styles.right_two_card_font_p}>
           <span>{sum}</span>

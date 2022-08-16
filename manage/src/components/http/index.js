@@ -3,10 +3,9 @@
  */
 
 import Chart from "@components/charts";
-import { useFakerColorArr, useFakerLoading, useFakerOclockTimeArrByOrder, useFakerRandomNumArrByOclock } from "@utils/hooks/faker";
-import { useFakerNumArrByOrderLen } from "@utils/hooks";
-import { errorType, useGetErrorData, waitTime } from "src/store";
-
+import { useFakerColorArr, useFakerLoading } from "@utils/hooks/faker";
+import { useFakerNumArrByOrderLen, useFakerOclockTimeArrByOrder, useFakerTimePassingArr } from "@utils/hooks";
+import { errorType, useGetErrorData, waitTime, Fetchtime } from "src/store";
 /**
  * 在不同时段请求成功和请求错误的双条形图--bar
  */
@@ -81,46 +80,43 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
     />
 }
 /**
- * 在不同时段请求成功和请求错误多条形折线图
+ * 在不同时段具体错误类型的总数走势图
  */
-export const HttpLinesChartWithDifferentTime = ({ width = 1000, height = 400, Linenums = 2 }) => {
-    const time = 1500, initLength = 10;
-    const timeArr = useFakerOclockTimeArrByOrder(initLength, time),
-        nums = useFakerRandomNumArrByOclock(initLength, time, Linenums),
-        colors = useFakerColorArr(2),
-        isLoading = useFakerLoading(time);
+export const HttpLinesChartWithDifferentTime = ({ height = 400, initLength = 10, errorType = 'jsError' }) => {
+    const timeArr = useFakerOclockTimeArrByOrder(initLength, Fetchtime),
+        nums = useFakerTimePassingArr(initLength, Fetchtime),
+        isLoading = useFakerLoading(waitTime);
     return <Chart
         isLoading={isLoading}
-        width={width}
         height={height}
-        autoResize={true}
         option={{
             title: {
                 left: 'center',
-                text: '这里是每种具体错误的错误代码在不同时段的数量'
+                text: `${errorType} 错误数量时间图`
             },
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                formatter: `{a}在 {b} 时间出现 {c} 次`
             },
             xAxis: {
                 data: timeArr
             },
             yAxis: {},
-            series: nums.map((value, index) => {
-                return {
+            series: [
+                {
+                    name: `${errorType}`,
                     type: 'line',
                     showSymbol: true,
-                    data: value,
-                    stack: 'x',
-                    color: colors[index],
-                    name: `错误类型：${index}`,
+                    smooth: true,
+                    areaStyle: {},
                     emphasis: {
                         //高亮指定线
                         focus: 'series'
                     },
-                    smooth: true,
-                };
-            }),
+                    stack: 'x',
+                    data: nums,
+                }
+            ],
         }}
 
     />
