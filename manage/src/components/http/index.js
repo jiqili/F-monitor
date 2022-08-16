@@ -79,6 +79,7 @@ export const HttpDoubleBarsChartWithDifferentTime = ({ width = 1000, height = 40
         }}
     />
 }
+
 /**
  * 在不同时段具体错误类型的总数走势图
  */
@@ -99,21 +100,21 @@ export const HttpLinesChartWithDifferentTime = ({ height = 400, initLength = 10,
                 formatter: `{a}在 {b} 时间出现 {c} 次`
             },
             xAxis: {
-                data: timeArr
+                data: timeArr,
+                type: 'category',
+                boundaryGap: false,
             },
             yAxis: {},
             series: [
                 {
                     name: `${errorType}`,
                     type: 'line',
-                    showSymbol: true,
                     smooth: true,
-                    areaStyle: {},
-                    emphasis: {
-                        //高亮指定线
-                        focus: 'series'
+                    symbol: 'none',
+                    areaStyle: {
+                        normal: {},
                     },
-                    stack: 'x',
+                    stack: 'a',
                     data: nums,
                 }
             ],
@@ -166,3 +167,5 @@ export const HttpPieChartWithErrorType = ({ height = 500 }) => {
         }}
     />
 }
+
+

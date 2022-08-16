@@ -42,16 +42,16 @@ export const UseFakerRandomIndexArr = (length, arr = []) => {
 export const useFakerOclockTimeArrByOrder = (length = 0, time = 500) => {
     let startHour = 8, startMinute = 0;
     function execTime() {
-        if (startMinute >= 50) {
+        if (startMinute >= 59) {
             startMinute = 0;
             startHour++;
         } else {
-            startMinute += 10;
+            startMinute += 1;
         }
         if (startHour >= 23) {
             startHour = 0;
         }
-        return `${startHour}:${startMinute}`;
+        return `${startHour}:${startMinute<10?'0'+startMinute:startMinute}`;
     }
     const [arr, setArr] = useState(Array(length).fill(0).map(execTime));
     useEffect(() => {
