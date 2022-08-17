@@ -51,6 +51,10 @@ export const errorHttpUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
 const USERPERFORMANCE = ['pv', 'uv'];
 
 const PERFORMANCETYPE=['fp','fcp','domReady'];
+/**
+ * 网络请求项
+ */
+export const performanceHttpRequestTypes=['GET','POST','PUT','DELETE','OPTIONS'];
 
 const DataProvider = ({ children }) => {
     const errorArray = useFakerNumArrByOrderLen(errorType.length, Fetchtime);

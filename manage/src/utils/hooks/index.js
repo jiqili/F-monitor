@@ -51,7 +51,7 @@ export const useFakerOclockTimeArrByOrder = (length = 0, time = 500) => {
         if (startHour >= 23) {
             startHour = 0;
         }
-        return `${startHour}:${startMinute<10?'0'+startMinute:startMinute}`;
+        return `${startHour}:${startMinute < 10 ? '0' + startMinute : startMinute}`;
     }
     const [arr, setArr] = useState(Array(length).fill(0).map(execTime));
     useEffect(() => {
@@ -85,4 +85,24 @@ export const useFakerTimePassingArr = (length = 0, time) => {
     }, []);
 
     return arr;
+}
+
+
+/**
+ * 获得给定长度的uuid数组
+ */
+export const UseFakerUUIDArray = (length = 1) => {
+    return Array.from({ length }, () => faker.datatype.uuid());
+}
+/**
+ * 获得给定长度的时间数组
+ */
+export const UseFakerDateTimeArray=(length=1)=>{
+    return Array.from({length},()=>faker.date.between('2022-08-01T00:00:00.000Z', '2022-08-16T00:00:00.000Z'))
+}
+/**
+ * 获得给定长度的数值数组
+ */
+ export const UseFakerNumArray=(length=1)=>{
+    return Array.from({length},()=>faker.datatype.number({ min: 70, max: 300, precision: 1 }))
 }

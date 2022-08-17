@@ -4,7 +4,7 @@ import { DataSmoothLineChart } from "@components/http";
 import { useFakerOclockTimeArrByOrder, useFakerTimePassingArr } from "@utils/hooks";
 import { Fetchtime } from "src/store";
 import { PagePieChart } from "@components/charts";
-function SegementsChartsHeader({ title, children }) {
+export function SegementsChartsHeader({ title, children }) {
     return (
         <>
             <Row>

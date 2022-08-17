@@ -1,35 +1,50 @@
-import { Select, Col, Row } from 'antd';
+import { List, Card, Row, Col } from 'antd';
 
 
 import styles from "./searchList.module.css";
 
 
-const { Option } = Select;
 
 
 
-export default function SearchList() {
 
+export default function SearchList({ data, headerArray }) {
     return (
-        <Row gutter={8} align={'middle'}>
-            <Col span={2}>
-                <Select
-                    defaultValue="lucy"
-                    style={{
-                        width: 120,
-                    }}
-
-                >
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                </Select>
-            </Col>
-        </Row>
+        <>
+            <List
+                header={<HeaderContent headerArray={headerArray} />}
+                dataSource={data}
+                renderItem={item =>
+                    <List.Item key={item.uuid} className={styles.ListItem}>
+                        <CardItem
+                            dataArray={item.renderArray}
+                        />
+                    </List.Item>
+                }
+            />
+        </>
     )
 }
 
+const HeaderContent = ({ headerArray }) => {
+    const renderArray = Array.isArray(headerArray) ? headerArray : [headerArray];
+    return (
+        <div className={`${styles.ContentWrapper} ${styles.Header}`} 
+        style={{ gridTemplateColumns: `repeat(${renderArray.length},minmax(200px,1fr))` }} >
+            {renderArray.map((item, index) =>
+                <div className={styles.content} key={index}>{`${item}`}</div>
+            )}
+        </div>
+    )
+}
 
-function HeadFilter(){
-    
+const CardItem = ({ dataArray }) => {
+    const renderArray = Array.isArray(dataArray) ? dataArray : [dataArray];
+    return (
+        <div className={styles.ContentWrapper} style={{ gridTemplateColumns: `repeat(${renderArray.length},minmax(200px,1fr))` }}>
+            {renderArray.map((item, index) =>
+                <div className={styles.content} key={index}>{`${item}`}</div>
+            )}
+        </div>
+    )
 }
