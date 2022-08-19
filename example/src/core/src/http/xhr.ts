@@ -37,6 +37,7 @@ export class AjaxInterceptor extends BaseInterceptor {
       const requestData: string = body
       const sendTime = Date.now() //记录发送时间
       this.addEventListener("readystatechange", function () {
+        console.log(this._isUrlInIgnoreList)
         if (this._isUrlInIgnoreList){
           return //跳过发送给监测系统的请求
         }

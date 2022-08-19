@@ -59,7 +59,7 @@ const initNavigationData = () => {
 const initPaintData = () => {
   const observer = new PerformanceObserver(list => {
     for(const entry of list.getEntries()) {
-      emit({type: 'Performance', name: entry.name, data: {time: entry.duration}})
+      emit({type: 'Performance', name: entry.name, data: {time: entry.startTime}})
     }
   })
   observer.observe({entryTypes:['paint']})
