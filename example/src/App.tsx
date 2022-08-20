@@ -3,11 +3,15 @@ import Err from "./view/Error/Err"
 import Event from "./view/Action/Action"
 import Http from "./view/Http/Http"
 import './App.css'
-import {ReactBoundary, SetUrlIgnoreList} from'./core/index' //如要使用react捕获，在需要捕获的组件用ReactBoundary包裹即可
+import {ReactBoundary, SetOptions} from'./core/index' //如要使用react捕获，在需要捕获的组件用ReactBoundary包裹即可
 // import './core/index'   不需要使用react捕获直接引入
 import {BuggyCounter} from "./view/Error/ReactbugCounter"
 
-SetUrlIgnoreList(['apifox'])
+SetOptions({//用户自定义请求池大小、发送间隔、请求过滤url
+  setEmitLen:3,
+  setEmitTime:3000,
+  // setUrlIgnoreList:['apifox']
+})
 
 export default function App() {
   return (

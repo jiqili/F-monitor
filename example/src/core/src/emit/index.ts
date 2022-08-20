@@ -7,8 +7,8 @@ let timer: Timeout
 
 let events: any[] = []
 const requestUrl: string | URL = 'http://localhost:8080'
-const MAX_CACHE_LEN = 5
-const MAX_WAITING_TIME = 5000
+let MAX_CACHE_LEN = 5
+let MAX_WAITING_TIME = 5000
 
 function emitPatch(data: event[]) {
   for (const item of data) {
@@ -46,4 +46,8 @@ function send() {
   }
 }
 
+export function SetEmitOptions(sendlen: number = 5 ,timelimit: number = 5000 ){
+  MAX_WAITING_TIME = timelimit
+  MAX_CACHE_LEN = sendlen
+}
 export {emit, emitPatch}

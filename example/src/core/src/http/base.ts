@@ -35,7 +35,6 @@ export class BaseInterceptor {
   }
 
   isUrlInIgnoreList(url: string): boolean {
-    console.log(this._ignoreList)
     if(!this._ignoreList ) return false
 
     return this._ignoreList.some((urlItem)=>{
