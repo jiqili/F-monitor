@@ -3,6 +3,8 @@
  */
 import { useContext, createContext } from "react";
 import { useFakerNumArrByOrderLen, UseFakerRandomIndexArr, UseFakerRandomReason, UseFakerUrlsArrByOrderLen } from "@utils/hooks";
+import {useFetchOnceData} from "@utils/hooks/fetch";
+
 
 const dataContext = createContext({});
 
@@ -102,9 +104,9 @@ export const performanceHttpRequestTypes = ['GET', 'POST', 'PUT', 'DELETE', 'OPT
 
 const DataProvider = ({ children }) => {
     const errorArray = useFakerNumArrByOrderLen(errorType.length, Fetchtime);
-    const userArray = useFakerNumArrByOrderLen(USERPERFORMANCE.length, Fetchtime);
+    const onceData=useFetchOnceData();
     return (
-        <dataContext.Provider value={{ errorArray, userArray }}>
+        <dataContext.Provider value={{ errorArray,onceData }}>
             {children}
         </dataContext.Provider>
     )
@@ -122,9 +124,20 @@ export const useGetErrorData = (errortype) => {
     return errorType.includes(errortype) ? errorArray[errorType.indexOf(errortype)] : errorArray;
 }
 /**
- * 获取uv，pv
+ * 获取uv，pv,浏览器
  */
-export const useGetUserData = (usertype) => {
-    const { userArray } = useContext(dataContext);
-    return USERPERFORMANCE.includes(usertype) ? userArray[errorType.indexOf(usertype)] : userArray;
+export const useGetPVUVBROWSERData=()=>{
+    const {onceData}=useContext(dataContext);
+    const {pv=10,uv=10,browsers=[
+        {'browsers':'chrome','number':12},
+        {'browsers':'firefox','number':12},
+    ]}=onceData;
+    return {pv,uv,browsers};
+}
+
+//获取错误数量
+export const useGetResourceErrorNum=()=>{
+    const {onceData}=useContext(dataContext);
+    const {errorResourceNum=0,errorNum=0}=onceData;
+    return {errorResourceNum,errorNum}
 }

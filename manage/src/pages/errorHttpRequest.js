@@ -1,7 +1,9 @@
 import { Col, Row } from 'antd';
 import { HttpLinesChartWithDifferentTime } from "@components/http";
 import _List from '@components/errorList';
-import { errorUrlsLen,errorHttpUrls,errorHttpTypes,errorHttpReasons } from 'src/store';
+import { errorUrlsLen, errorHttpUrls, errorHttpTypes, errorHttpReasons } from 'src/store';
+import { useFetchAnyWayData } from '@utils/hooks/fetch';
+import { FetchHTTPErrors } from '@utils/fetch';
 
 const App = () => {
     const data = Array.from({ length: errorUrlsLen }, (_, index) => {
@@ -10,7 +12,9 @@ const App = () => {
             errorUrl: errorHttpUrls[index],
             errorReason: errorHttpReasons[index]
         }
-    })
+    });
+    const time = new Date();
+    const FetchData = useFetchAnyWayData(FetchHTTPErrors, 1661079148116, time.getTime()).sort((a, b) => b.timeStamp - a.timeStamp);
     return (
         <>
             <Row>
@@ -20,7 +24,14 @@ const App = () => {
             </Row>
             <Row>
                 <Col xs={24} lg={24}>
-                    <_List data={data} />
+                    <_List data={data} fetchList={Array.from(FetchData,({name,requestUrl,browser,requestMethod,stack=[]})=>{
+                        return {
+                            errorType:name,
+                            errorUrl:requestUrl,
+                            errorReason:`${browser} Method:${requestMethod}`,
+                            codeLine:`${stack.map(item=>`${item.originLine}  ${item.source}`).join('\n')}`
+                        }
+                    })}/>
 
                 </Col>
             </Row>

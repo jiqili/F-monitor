@@ -3,12 +3,12 @@ import { UseFakerDateTimeArray, UseFakerNumArray, UseFakerRandomIndexArr, UseFak
 import { performanceHttpRequestTypes } from "src/store";
 
 const App = () => {
-    const initlen = 10;
+    const initlen = 15;
     const requestTimeArr = UseFakerDateTimeArray(initlen),
         requestPathArr = UseFakerUrlsArrByOrderLen(initlen),
         requestResTimeArr = UseFakerNumArray(initlen),
         uuidArr = UseFakerUUIDArray(initlen),
-        requestTypeArr = UseFakerRandomIndexArr(initlen, performanceHttpRequestTypes),
+        requestTypeArr = UseFakerRandomIndexArr(initlen, ['GET']),
         statusArr = UseFakerRandomIndexArr(initlen, ['success', 'faild']);
     return (
         <>

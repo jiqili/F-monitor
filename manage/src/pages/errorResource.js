@@ -2,6 +2,8 @@ import { Col, Row } from 'antd';
 import { HttpLinesChartWithDifferentTime } from "@components/http";
 import _List from '@components/errorList';
 import { errorUrlsLen, errorResourceUrls, errorResourceTypes,errorResourceReasons } from 'src/store';
+import { useFetchAnyWayData } from '@utils/hooks/fetch';
+import { FetchResourceErrors } from '@utils/fetch';
 const App = () => {
     const data = Array.from({ length: errorUrlsLen }, (_, index) => {
         return {
@@ -10,6 +12,8 @@ const App = () => {
             errorReason: errorResourceReasons[index],
         }
     })
+    const time=new Date();
+    const FetchData=useFetchAnyWayData(FetchResourceErrors,1661079148116, time.getTime()).sort((a,b)=>b.timeStamp-a.timeStamp);
     return (
         <>
             <Row>
@@ -19,7 +23,13 @@ const App = () => {
             </Row>
             <Row>
                 <Col xs={24} lg={24}>
-                    <_List data={data} />
+                    <_List data={data} fetchList={Array.from(FetchData,({reason,url})=>{
+                        return {
+                            errorType:reason,
+                            errorUrl:url,
+                            errorReason:reason,
+                        }
+                    })} />
 
                 </Col>
             </Row>

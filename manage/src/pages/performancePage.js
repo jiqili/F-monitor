@@ -7,18 +7,6 @@ import { PagePieChart } from '@components/charts';
 const App = () => {
     return (
         <>
-            {/* 头部三张图 */}
-            {/* <Row gutter={8} align={'middle'}>
-                <Col xs={24} lg={8} xl={8}>
-                    <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
-                </Col>
-                <Col xs={24} lg={8} xl={8}>
-                    <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
-                </Col>
-                <Col xs={24} lg={8} xl={8}>
-                    <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
-                </Col>
-            </Row> */}
             <BottomList />
         </>
     )
@@ -29,7 +17,7 @@ import { UseFakerDateTimeArray, UseFakerNumArray, UseFakerRandomIndexArr, UseFak
 import { performanceHttpRequestTypes } from "src/store";
 
 const BottomList = () => {
-    const initlen = 10;
+    const initlen = 30;
     const requestTimeArr = UseFakerDateTimeArray(initlen),
         requestPathArr = UseFakerUrlsArrByOrderLen(initlen),
         requestResTimeArr = UseFakerNumArray(initlen),

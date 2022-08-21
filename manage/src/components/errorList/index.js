@@ -27,7 +27,7 @@ export default function _List({ data, fetchList = [] }) {
     )
 }
 
-function _Card({ index, errorType, errorUrl, errorReason }) {
+function _Card({ index, errorType, errorUrl, errorReason, codeLine }) {
     const [isModalVisible, setVisible] = useState(false);
     return (
         <Card className={styles.card}>
@@ -58,11 +58,15 @@ function _Card({ index, errorType, errorUrl, errorReason }) {
                             onOk={setVisible.bind(null, false)}
                             onCancel={setVisible.bind(null, false)}
                         >
-                            <p>目标url：{host}{errorUrl}</p>
-                            <pre>原因：
+                            <p>目标url:{errorUrl}</p>
+                            原因：
+                            <pre>
                                 <code className={styles.redColor}>
                                     {errorReason}
                                 </code>
+                                <pre>
+                                    {codeLine && <code className={styles.redColor}>{codeLine}</code>}
+                                </pre>
                             </pre>
                         </Modal>
                     </div>
