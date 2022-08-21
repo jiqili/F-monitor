@@ -14,7 +14,7 @@ const App = () => {
         <>
             <Row>
                 <Col xs={24} lg={24}>
-                    <HttpLinesChartWithDifferentTime height={300} initLength={12} errorType='resourceError' />
+                    <HttpLinesChartWithDifferentTime height={300} initLength={15} errorType='resourceError' />
                 </Col>
             </Row>
             <Row>

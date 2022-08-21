@@ -17,7 +17,7 @@ export const waitTime = 1000;
 /**
  * 间隔获取时间
  */
-export const Fetchtime = 5000;
+export const Fetchtime = 1000*60*15;
 /**
  * 主机名
  */
@@ -31,7 +31,7 @@ const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'
 /**
  * js错误
  */
-export const errorUrlsLen = 15,
+export const errorUrlsLen = 5,
     errorJsUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
     errorJsTypes = UseFakerRandomIndexArr(errorUrlsLen, JSERRORTYPES);
 

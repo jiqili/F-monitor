@@ -39,45 +39,36 @@ export const UseFakerRandomIndexArr = (length, arr = []) => {
 /**
  * 固定长度的时序数组
  */
-export const useFakerOclockTimeArrByOrder = (length = 0, time = 500) => {
-    let startHour = 8, startMinute = 0;
+export const useFakerOclockTimeArrByOrder = (length = 0) => {
+    const date = new Date();
+    let startHour = date.getHours(), startMinute = (date.getMinutes() / 15 >> 0) * 15;
     function execTime() {
-        if (startMinute >= 59) {
-            startMinute = 0;
-            startHour++;
+        if (startMinute <= 0) {
+            startMinute = 45;
+            startHour--;
         } else {
-            startMinute += 1;
+            startMinute -= 15;
         }
-        if (startHour >= 23) {
-            startHour = 0;
+        if (startHour <= 0) {
+            startHour = 23;
         }
         return `${startHour}:${startMinute < 10 ? '0' + startMinute : startMinute}`;
     }
-    const [arr, setArr] = useState(Array(length).fill(0).map(execTime));
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setArr((arr) => {
-                arr.shift();
-                arr.push(execTime());
-                return arr;
-            });
-        }, time);
-        return () => clearInterval(timer);
-    }, []);
-    return arr;
+    const [arr, _] = useState(Array(length).fill(0).map(execTime));
+    return arr.reverse();
 }
 
 
 /**
  * 固定长度，随时间走的数组
  */
-export const useFakerTimePassingArr = (length = 0, time) => {
-    const [arr, setArr] = useState(Array.from({ length }, () => faker.datatype.number({ min: 0, max: length * 10, precision: 1 })));
+export const useFakerTimePassingArr = (length = 0, time, { min = 0, max = 10, precision = 1 }) => {
+    const [arr, setArr] = useState(Array.from({ length }, () => faker.datatype.number({ min, max, precision })));
     useEffect(() => {
         const timer = setInterval(() => {
             setArr(arr => {
                 let ans = arr.slice(1);
-                ans.push(faker.datatype.number({ min: 0, max: length * 10, precision: 1 }));
+                ans.push(faker.datatype.number({ min, max, precision }));
                 return ans;
             });
         }, time);
@@ -97,12 +88,28 @@ export const UseFakerUUIDArray = (length = 1) => {
 /**
  * 获得给定长度的时间数组
  */
-export const UseFakerDateTimeArray=(length=1)=>{
-    return Array.from({length},()=>faker.date.between('2022-08-01T00:00:00.000Z', '2022-08-16T00:00:00.000Z'))
+export const UseFakerDateTimeArray = (length = 1) => {
+    //2022-8-21重构，需要对时间默认倒排序
+    const date = new Date();
+    let startDay=date.getDate(),startHour = date.getHours(), startMinute = date.getMinutes();
+    function execTime() {
+        if (startMinute <= 5) {
+            startMinute = 59 - Math.floor(Math.random() * 5);
+            startHour--;
+        } else {
+            startMinute -= Math.floor(Math.random() * startMinute);
+        }
+        if (startHour <= 0) {
+            startHour = 23;
+            startDay--;
+        }
+        return `2022-8-${startDay} ${startHour}:${startMinute < 10 ? '0' + startMinute : startMinute}`;
+    }
+    return Array.from({ length }, execTime);
 }
 /**
  * 获得给定长度的数值数组
  */
- export const UseFakerNumArray=(length=1)=>{
-    return Array.from({length},()=>faker.datatype.number({ min: 70, max: 300, precision: 1 }))
+export const UseFakerNumArray = (length = 1) => {
+    return Array.from({ length }, () => faker.datatype.number({ min: 70, max: 300, precision: 1 }))
 }

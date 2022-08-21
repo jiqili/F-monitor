@@ -24,7 +24,7 @@ export const SegementsChartsWithUser = () => {
         <SegementsChartsHeader title={'用户行为数据监控'}>
             <Col span={24}>
                 <Card>
-                    <PVUVCharts />
+                    <UserPerformanceCharts />
                 </Card>
             </Col>
         </SegementsChartsHeader>
@@ -32,17 +32,20 @@ export const SegementsChartsWithUser = () => {
 }
 
 
-const PVUVCharts = () => {
-    const Xarr = useFakerOclockTimeArrByOrder(50, Fetchtime),
-        Yarr_1 = useFakerTimePassingArr(50, Fetchtime),
-        Yarr_2 = useFakerTimePassingArr(50, Fetchtime);
+const UserPerformanceCharts = () => {
+    const arr_len = 30;
+    const Xarr = useFakerOclockTimeArrByOrder(arr_len, Fetchtime),
+        dnsArr = useFakerTimePassingArr(arr_len, Fetchtime, { min: 0, max: 20, precision: 2 }),
+        domParse = useFakerTimePassingArr(arr_len, Fetchtime, { min: 43, max: 70, precision: 5 }),
+        domReady = useFakerTimePassingArr(arr_len, Fetchtime, { min: 21, max: 70, precision: 3 });
 
     return (
         <DataSmoothLineChart
             xdata={Xarr}
-            ydata={[Yarr_1, Yarr_2]}
-            typedata={['pv', 'uv']}
+            ydata={[dnsArr, domParse, domReady]}
+            typedata={['dns', 'domParse 单位10ms', 'domReady 单位10ms']}
             height={300}
+            title={'dns dom解析等'}
         />
     )
 }
@@ -66,15 +69,17 @@ export const SegementsChartsWithHost = () => {
 }
 
 const FPFCPCharts = () => {
-    const Xarr = useFakerOclockTimeArrByOrder(50, Fetchtime),
-        Yarr_1 = useFakerTimePassingArr(50, Fetchtime),
-        Yarr_2 = useFakerTimePassingArr(50, Fetchtime);
+    const arr_len = 10, maxPlus = 10;
+    const Xarr = useFakerOclockTimeArrByOrder(arr_len, Fetchtime),
+        Yarr_1 = useFakerTimePassingArr(arr_len, Fetchtime, maxPlus),
+        Yarr_2 = useFakerTimePassingArr(arr_len, Fetchtime, maxPlus);
 
     return (
         <DataSmoothLineChart
             xdata={Xarr}
             ydata={[Yarr_1, Yarr_2]}
             typedata={['fp', 'fcp']}
+            title={'fp fcp'}
             height={300}
         />
     )

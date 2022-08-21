@@ -8,20 +8,17 @@ const App = () => {
     return (
         <>
             {/* 头部三张图 */}
-            <Row gutter={8} align={'middle'}>
-                {/* 这里放dns饼图 */}
+            {/* <Row gutter={8} align={'middle'}>
                 <Col xs={24} lg={8} xl={8}>
                     <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
                 </Col>
-                {/* 这里放fp饼图 */}
                 <Col xs={24} lg={8} xl={8}>
                     <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
                 </Col>
-                {/* 这里放fcp饼图 */}
                 <Col xs={24} lg={8} xl={8}>
                     <PagePieChart height={300} segements={['0-100', '101-150', '151-200']} />
                 </Col>
-            </Row>
+            </Row> */}
             <BottomList />
         </>
     )

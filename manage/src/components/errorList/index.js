@@ -9,10 +9,10 @@ import styles from "./errorList.module.css";
  * @param {{errorType,errorUrl,errorReason}} param0 
  * @returns 
  */
-export default function _List({ data }) {
+export default function _List({ data, fetchList = [] }) {
     return (
         <List
-            dataSource={data}
+            dataSource={[...fetchList, ...data]}
             renderItem={(item, index) =>
                 <List.Item
                     className={styles.listItem}

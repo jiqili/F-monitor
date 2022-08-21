@@ -1,4 +1,4 @@
-import { List, Card, Row, Col } from 'antd';
+import { List } from 'antd';
 
 
 import styles from "./searchList.module.css";
@@ -8,12 +8,13 @@ import styles from "./searchList.module.css";
 
 
 
-export default function SearchList({ data, headerArray }) {
+export default function SearchList({ data, headerArray,fetcharr=[] }) {
     return (
         <>
             <List
+            className={styles.List}
                 header={<HeaderContent headerArray={headerArray} />}
-                dataSource={data}
+                dataSource={[...fetcharr,...data]}
                 renderItem={item =>
                     <List.Item key={item.uuid} className={styles.ListItem}>
                         <CardItem

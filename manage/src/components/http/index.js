@@ -3,8 +3,8 @@
  */
 
 import Chart from "@components/charts";
-import { useFakerColorArr, useFakerLoading } from "@utils/hooks/faker";
-import { useFakerNumArrByOrderLen, useFakerOclockTimeArrByOrder, useFakerTimePassingArr } from "@utils/hooks";
+import { useFakerLoading } from "@utils/hooks/faker";
+import { useFakerOclockTimeArrByOrder, useFakerTimePassingArr } from "@utils/hooks";
 import { errorType, useGetErrorData, waitTime, Fetchtime } from "src/store";
 
 
@@ -13,12 +13,19 @@ import { errorType, useGetErrorData, waitTime, Fetchtime } from "src/store";
  */
 export const HttpLinesChartWithDifferentTime = ({ height = 400, initLength = 10, errorType = 'jsError' }) => {
     const timeArr = useFakerOclockTimeArrByOrder(initLength, Fetchtime),
-        nums = useFakerTimePassingArr(initLength, Fetchtime),
+        nums = useFakerTimePassingArr(initLength, Fetchtime, { min: 0, max: 15, precision: 2 }),
         isLoading = useFakerLoading(waitTime);
     return <Chart
         isLoading={isLoading}
         height={height}
         option={{
+            visualMap: [{
+                show: false,
+                type: 'continuous',
+                seriesIndex: 0,
+                min: -10,
+                max: 15
+            }],
             title: {
                 left: 'center',
                 text: `${errorType} 错误数量时间图`
@@ -99,7 +106,7 @@ export const HttpPieChartWithErrorType = ({ height = 500 }) => {
 /**
  * 各种数据的曲线趋势图
  */
-export const DataSmoothLineChart = ({ xdata, ydata, typedata, height }) => {
+export const DataSmoothLineChart = ({ xdata, ydata, typedata, height, title }) => {
     const isLoading = useFakerLoading(waitTime);
     return <Chart
         isLoading={isLoading}
@@ -108,7 +115,7 @@ export const DataSmoothLineChart = ({ xdata, ydata, typedata, height }) => {
         option={{
             title: {
                 left: 'center',
-                text: `${typedata} 数量时间图`
+                text: `${title} 数量时间图`
             },
             tooltip: {
                 trigger: 'axis',
