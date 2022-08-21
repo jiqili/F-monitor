@@ -37,6 +37,27 @@ export const UseFakerRandomIndexArr = (length, arr = []) => {
 }
 
 /**
+ * 固定长度的数组，给定map返回随机原因
+ */
+export const UseFakerRandomReason = (arr = [], map = new Map()) => {
+    if (!arr.length) {
+        return [];
+    }
+    return Array.from({ length: arr.length }, (_, index) => {
+        const reasons = map.get(arr[index]);
+        if (!reasons) {
+            return `not found`;
+        }
+        const len = reasons.length;
+        if (len < 2) {
+            return reasons[0];
+        }
+        const _index = Math.floor(Math.random() * len);
+        return reasons[_index] || reasons[0];
+    })
+}
+
+/**
  * 固定长度的时序数组
  */
 export const useFakerOclockTimeArrByOrder = (length = 0) => {
@@ -91,7 +112,7 @@ export const UseFakerUUIDArray = (length = 1) => {
 export const UseFakerDateTimeArray = (length = 1) => {
     //2022-8-21重构，需要对时间默认倒排序
     const date = new Date();
-    let startDay=date.getDate(),startHour = date.getHours(), startMinute = date.getMinutes();
+    let startDay = date.getDate(), startHour = date.getHours(), startMinute = date.getMinutes();
     function execTime() {
         if (startMinute <= 5) {
             startMinute = 59 - Math.floor(Math.random() * 5);

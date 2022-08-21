@@ -2,7 +2,7 @@
  * 存放数据的地方
  */
 import { useContext, createContext } from "react";
-import { useFakerNumArrByOrderLen, UseFakerRandomIndexArr, UseFakerUrlsArrByOrderLen } from "@utils/hooks";
+import { useFakerNumArrByOrderLen, UseFakerRandomIndexArr, UseFakerRandomReason, UseFakerUrlsArrByOrderLen } from "@utils/hooks";
 
 const dataContext = createContext({});
 
@@ -17,7 +17,7 @@ export const waitTime = 1000;
 /**
  * 间隔获取时间
  */
-export const Fetchtime = 1000*60*15;
+export const Fetchtime = 1000 * 60 * 15;
 /**
  * 主机名
  */
@@ -26,35 +26,79 @@ export const host = `http:127.0.0.1:80`;
 
 const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'],
     RESOURCEERRORTYPES = ['Script Load Error', 'Image Load Error'],
-    HTTPERRORTYPES = ['Not Found', 'Internal Server Error'];
+    HTTPERRORTYPES = ['Not Found', 'Internal Server Error'],
+    ERRORREASONS = new Map([
+        ['RangeError', [
+            ` The argument must be between -500 and 500.
+            at check (<anonymous>:5:15)
+            at <anonymous>:11:5`,
+            `The argument must be an "apple", "banana", or "carrot".
+            at check (<anonymous>:5:15)
+            at <anonymous>:11:5`
+        ]],
+        ['ReferenceError', [
+            `adddlert is not defined
+            at <anonymous>:2:3`,
+            `fn is not defined
+            at check (<anonymous>:5:15)
+            at <anonymous>:11:5`
+        ]],
+        ['SyntaxError', [
+            `Invalid or unexpected token`
+        ]],
+        ['TypeError', [
+            ` Cannot read properties of null (reading 'f')
+            at <anonymous>:2:8`,
+            ` Cannot read properties of undefined (reading 'f')
+            at <anonymous>:10:37`
+        ]],
+        ['Script Load Error', [
+            `Failed to load resource: net::ERR_CONNECTION_REFUSED`,
+            `Failed to load resource: ERR_NAME_NOT_RESOLVED`
+        ]],
+        ['Image Load Error', [
+            `Failed to load resource: net::ERR_CONNECTION_REFUSED`,
+            `Failed to load resource: ERR_NAME_NOT_RESOLVED`
+        ]],
+        ['Not Found', [
+            `cannot find this page`
+        ]],
+        ['Internal Server Error', [
+            `Internal Server Error`
+        ]]
+    ]);
+    // console.log({ERRORREASONS});
 
 /**
  * js错误
  */
 export const errorUrlsLen = 5,
     errorJsUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
-    errorJsTypes = UseFakerRandomIndexArr(errorUrlsLen, JSERRORTYPES);
+    errorJsTypes = UseFakerRandomIndexArr(errorUrlsLen, JSERRORTYPES),
+    errorJsReasons = UseFakerRandomReason(errorJsTypes, ERRORREASONS);
 
 /**
  * resource错误
  */
 export const errorResourceUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
-    errorResourceTypes = UseFakerRandomIndexArr(errorUrlsLen, RESOURCEERRORTYPES);
+    errorResourceTypes = UseFakerRandomIndexArr(errorUrlsLen, RESOURCEERRORTYPES),
+    errorResourceReasons = UseFakerRandomReason(errorResourceTypes, ERRORREASONS);
 
 /**
  * http请求错误
  */
 export const errorHttpUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
-    errorHttpTypes = UseFakerRandomIndexArr(errorUrlsLen, HTTPERRORTYPES);
+    errorHttpTypes = UseFakerRandomIndexArr(errorUrlsLen, HTTPERRORTYPES),
+    errorHttpReasons = UseFakerRandomReason(errorHttpTypes, ERRORREASONS);
 
 
 const USERPERFORMANCE = ['pv', 'uv'];
 
-const PERFORMANCETYPE=['fp','fcp','domReady'];
+const PERFORMANCETYPE = ['fp', 'fcp', 'domReady'];
 /**
  * 网络请求项
  */
-export const performanceHttpRequestTypes=['GET','POST','PUT','DELETE','OPTIONS'];
+export const performanceHttpRequestTypes = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'];
 
 const DataProvider = ({ children }) => {
     const errorArray = useFakerNumArrByOrderLen(errorType.length, Fetchtime);

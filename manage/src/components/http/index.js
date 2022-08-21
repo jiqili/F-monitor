@@ -47,7 +47,7 @@ export const HttpLinesChartWithDifferentTime = ({ height = 400, initLength = 10,
                     smooth: true,
                     symbol: 'none',
                     areaStyle: {
-                        normal: {},
+                        // normal: {},
                     },
                     stack: 'a',
                     data: nums,

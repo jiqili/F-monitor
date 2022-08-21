@@ -1,13 +1,13 @@
 import { Col, Row } from 'antd';
 import { HttpLinesChartWithDifferentTime } from "@components/http";
 import _List from '@components/errorList';
-import { errorUrlsLen, errorJsUrls, errorJsTypes } from 'src/store';
+import { errorUrlsLen, errorJsUrls, errorJsTypes,errorJsReasons } from 'src/store';
 const App = () => {
     const data = Array.from({ length: errorUrlsLen }, (_, index) => {
         return {
             errorType: errorJsTypes[index],
             errorUrl: errorJsUrls[index],
-            errorReason: '还没写'
+            errorReason: errorJsReasons[index]
         }
     })
     return (

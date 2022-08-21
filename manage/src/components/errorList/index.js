@@ -58,9 +58,12 @@ function _Card({ index, errorType, errorUrl, errorReason }) {
                             onOk={setVisible.bind(null, false)}
                             onCancel={setVisible.bind(null, false)}
                         >
-                            <p>在这里对异常进行描述</p>
                             <p>目标url：{host}{errorUrl}</p>
-                            <p>原因：{errorReason}</p>
+                            <pre>原因：
+                                <code className={styles.redColor}>
+                                    {errorReason}
+                                </code>
+                            </pre>
                         </Modal>
                     </div>
                 </div>
