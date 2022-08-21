@@ -3,7 +3,8 @@ import Err from "./view/Error/Err"
 import Event from "./view/Action/Action"
 import Http from "./view/Http/Http";
 import './App.css'
-import 'jiqi-f-monitor'
+import { initMonitor } from 'jiqi-f-monitor'
+initMonitor('http://1.15.77.73:8080/')
 export default function App() {
   return (
     <BrowserRouter>

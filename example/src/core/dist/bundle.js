@@ -52,7 +52,7 @@ var getPlatform = function () {
 
 var timer;
 var events = [];
-var requestUrl = 'http://localhost:8080';
+var requestUrl = '';
 var MAX_CACHE_LEN = 5;
 var MAX_WAITING_TIME = 5000;
 /**
@@ -83,6 +83,9 @@ function send() {
             window.requestIdleCallback(function () { return setTimeout(send, 17); });
         }
     }
+}
+function initServer(url) {
+    requestUrl = url;
 }
 
 // 可容忍的最大等待首屏时间
@@ -470,9 +473,11 @@ var ErrorInterceptor = /** @class */ (function () {
     return ErrorInterceptor;
 }());
 
-initPerformance();
-initUser();
-//测试异常部分
-var errorInterceptor = new ErrorInterceptor();
-errorInterceptor.init();
-console.log('monitor plugin installed');
+exports.initMonitor = function (url) {
+    initServer(url);
+    initPerformance();
+    initUser();
+    var errorInterceptor = new ErrorInterceptor();
+    errorInterceptor.init();
+    console.log('monitor plugin installed');
+};
