@@ -2,7 +2,7 @@ const fs = require('fs')
 const sourceMap = require('source-map')
 
 const rawSourceMap = JSON.parse(
-    fs.readFileSync('./assets/main.484dfe9f.js.map','utf-8').toString()
+    fs.readFileSync('./assets/main.84ef34dd.js.map','utf-8').toString()
 );
 
 /**

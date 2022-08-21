@@ -90,7 +90,7 @@ export default function Http() {
   }
   //fetch success
   async function handleFetch() {
-    const response = await fetch('http://1.15.77.73/:8080/fetch');
+    const response = await fetch('http://1.15.77.73:8080/fetch');
     const data = await response.json();
     setFetchData(data.data);
   }
