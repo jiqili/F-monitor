@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FetchAllErrors, FetchHTTPErrors, FetchHTTPSuccessRate, FetchPerformanceData, FetchPopularBrowsers, FetchPV, FetchResourceErrors, FetchUV } from "../fetch";
+import { FetchAllErrors, FetchHTTPSuccessRate, FetchPerformanceData, FetchPopularBrowsers, FetchPV, FetchResourceErrors, FetchUV } from "../fetch";
 
 
 

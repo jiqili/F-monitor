@@ -42,5 +42,7 @@
     text-align: center;
     font-size: 18px;
     color: grey;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 

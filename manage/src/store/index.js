@@ -74,7 +74,7 @@ const JSERRORTYPES = ['RangeError', 'ReferenceError', 'SyntaxError', 'TypeError'
 /**
  * js错误
  */
-export const errorUrlsLen = 5,
+export const errorUrlsLen = 3,
     errorJsUrls = UseFakerUrlsArrByOrderLen(errorUrlsLen),
     errorJsTypes = UseFakerRandomIndexArr(errorUrlsLen, JSERRORTYPES),
     errorJsReasons = UseFakerRandomReason(errorJsTypes, ERRORREASONS);

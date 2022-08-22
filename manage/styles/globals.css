@@ -11,7 +11,12 @@ a {
   text-decoration: none;
 }
 
-p{
+p {
   margin: 0;
   padding: 0;
+}
+
+pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

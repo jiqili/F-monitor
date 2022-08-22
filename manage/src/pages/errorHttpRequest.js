@@ -14,7 +14,7 @@ const App = () => {
         }
     });
     const time = new Date();
-    const FetchData = useFetchAnyWayData(FetchHTTPErrors, 1661079148116, time.getTime()).sort((a, b) => b.timeStamp - a.timeStamp);
+    const FetchData = useFetchAnyWayData(FetchHTTPErrors, time.getTime() - 3 * 60 * 60, time.getTime()).sort((a, b) => b.timeStamp - a.timeStamp);
     return (
         <>
             <Row>
@@ -24,14 +24,14 @@ const App = () => {
             </Row>
             <Row>
                 <Col xs={24} lg={24}>
-                    <_List data={data} fetchList={Array.from(FetchData,({name,requestUrl,browser,requestMethod,stack=[]})=>{
+                    <_List data={data} fetchList={Array.from(FetchData, ({ name, requestUrl, browser, requestMethod, stack = [] }) => {
                         return {
-                            errorType:name,
-                            errorUrl:requestUrl,
-                            errorReason:`${browser} Method:${requestMethod}`,
-                            codeLine:`${stack.map(item=>`${item.originLine}  ${item.source}`).join('\n')}`
+                            errorType: name,
+                            errorUrl: requestUrl,
+                            errorReason: `${browser} Method:${requestMethod}`,
+                            codeLine: `${stack.map(item => `${item.originLine}  ${item.source}`).join('\n')}`
                         }
-                    })}/>
+                    })} />
 
                 </Col>
             </Row>

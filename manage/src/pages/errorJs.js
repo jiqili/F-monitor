@@ -13,7 +13,8 @@ const App = () => {
         }
     });
     const time = new Date();
-    const FetchData = useFetchAnyWayData(FetchAllErrors, 1661079148116, time.getTime()).filter(item=>item.name==='JS Error').sort((a, b) => b.timeStamp - a.timeStamp);
+    //默认查询三分钟内的
+    const FetchData = useFetchAnyWayData(FetchAllErrors, time.getTime()-3*60*60, time.getTime()).filter(item=>item.name==='JS Error').sort((a, b) => b.timeStamp - a.timeStamp);
     return (
         <>
             <Row>

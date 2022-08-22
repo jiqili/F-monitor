@@ -13,7 +13,7 @@ const App = () => {
         }
     })
     const time=new Date();
-    const FetchData=useFetchAnyWayData(FetchResourceErrors,1661079148116, time.getTime()).sort((a,b)=>b.timeStamp-a.timeStamp);
+    const FetchData=useFetchAnyWayData(FetchResourceErrors,time.getTime()-3*60*60, time.getTime()).sort((a,b)=>b.timeStamp-a.timeStamp);
     return (
         <>
             <Row>

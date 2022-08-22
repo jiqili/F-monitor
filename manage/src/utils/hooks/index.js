@@ -19,8 +19,8 @@ export const useFakerNumArrByOrderLen = (length = 0, time = 500) => {
 /**
  * 固定长度的数组，返回url路径数组
  */
-export const UseFakerUrlsArrByOrderLen = (length = 0) => {
-    return Array.from({ length }, () => faker.system.directoryPath())
+export const UseFakerUrlsArrByOrderLen = (length = 0,host='http://1.15.77.73') => {
+    return Array.from({ length }, () => `${host}${faker.system.directoryPath()}`)
 }
 /**
  * 固定长度的数组，返回随机选择值的数组

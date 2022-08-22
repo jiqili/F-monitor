@@ -122,6 +122,7 @@ const BottomCol = () => {
       />
       <BottomCard
         title="使用占比最大的浏览器"
+        isBig={true}
         cur={`${browsers[0]['browser']}:
         ${Math.floor(100*browsers[0]['number']/browsersNumbers)}%`}
         old={`${browsers[1]['browser']}:
@@ -138,9 +139,9 @@ const BottomCol = () => {
   )
 }
 
-const BottomCard = ({ title, cur, old, href = '/' }) => {
+const BottomCard = ({ title, cur, old, href = '/',isBig=false }) => {
   return (
-    <Col xs={24} lg={6}>
+    <Col xs={24} lg={12} xl={isBig?9:5}>
       <Card title={title} href={href}>
         <div className={styles.BottomCard}>
           <p>{cur}</p>

@@ -1,6 +1,5 @@
 import { List, Checkbox, Card, Button, Modal } from 'antd';
 import { useState } from 'react';
-import { host } from 'src/store';
 import styles from "./errorList.module.css";
 
 
@@ -59,6 +58,7 @@ function _Card({ index, errorType, errorUrl, errorReason, codeLine }) {
                             onCancel={setVisible.bind(null, false)}
                         >
                             <p>目标url:{errorUrl}</p>
+
                             原因：
                             <pre>
                                 <code className={styles.redColor}>
@@ -68,6 +68,7 @@ function _Card({ index, errorType, errorUrl, errorReason, codeLine }) {
                                     {codeLine && <code className={styles.redColor}>{codeLine}</code>}
                                 </pre>
                             </pre>
+
                         </Modal>
                     </div>
                 </div>

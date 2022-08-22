@@ -5,7 +5,6 @@
  */
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
-import { debounce } from "@utils/tools";
 /**
  * 初始化图表，组件销毁时附带销毁图表，返回需要需要挂载的ref
  */
