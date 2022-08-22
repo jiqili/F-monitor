@@ -1,0 +1,48 @@
+/* 这里放index.js页面的样式规则 */
+
+
+
+.Wrapper p:hover{
+    color: black;
+  }
+.right_two_card {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    flex-flow: column nowrap;
+}
+
+
+.right_one_card {
+    display: grid;
+    color: grey;
+    grid-template-columns: 250px 1fr;
+}
+
+.right_one_card>p:last-child {
+    margin: 0 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.right_one_card>p:first-child,
+.right_two_card_font_p {
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+
+.BottomCard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: grey;
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
