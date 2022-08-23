@@ -48,7 +48,7 @@ export class FetchInterceptor extends BaseInterceptor {
                   sendTime,
                   stack,
                 }
-                console.log(res)
+                // console.log(res)
                 if(!this._isUrlInIgnoreList){
                   if(status >= 200 && status <300) {
                     emit({
@@ -78,7 +78,7 @@ export class FetchInterceptor extends BaseInterceptor {
                 };
 
                 if (!this._isUrlInIgnoreList) {
-                  console.log(e)
+                  // console.log(e)
                   emit({
                     type: 'Request',
                     name: 'fetch-failconnect',

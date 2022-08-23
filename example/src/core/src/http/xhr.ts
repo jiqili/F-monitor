@@ -51,7 +51,7 @@ export class AjaxInterceptor extends BaseInterceptor {
               requestData,
               status: this.status
             }
-            console.log(successDataLog) 
+            // console.log(successDataLog) 
             emit({
               type: 'Request',
               name: 'xhr-success',

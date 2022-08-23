@@ -24,7 +24,7 @@ export class ErrorInterceptor {
         }, true)
 
         window.onerror = (msg, url, row = 1, col = 1, error) => {
-            console.log('JS Error', {msg, url, row, col, error})
+            // console.log('JS Error', {msg, url, row, col, error})
             errorEmit({type: 'Error', name: 'JS Error', data: {reason: msg.toString(), url, row, col, error}})
             return true
         }

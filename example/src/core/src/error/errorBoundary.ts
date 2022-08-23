@@ -32,7 +32,7 @@ export  class ErrorBoundary extends React.Component {
         errorInfo:errorInfo.componentStack
       }
     })
-    console.log(errorInfo)
+    // console.log(errorInfo)
   }
 
   render() {

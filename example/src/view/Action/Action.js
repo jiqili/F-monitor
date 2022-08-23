@@ -8,7 +8,7 @@ export default function Event() {
     }
     let userList = []
     let USERNUMBER = 10
-    for(let i=0;i<USERNUMBER;i++) userList.push(`user${i+1}`)
+    for(let i=0;i<1;i++) userList.push(`user${i+1}`)
     return (
         <div className="info">
             <h1 className="info--h1">I am user action page</h1>
@@ -16,8 +16,9 @@ export default function Event() {
             <br />
             <fieldset>
                 <legend>Switch User</legend>
-                {userList.map(user => {
-                    return <button onClick={() => switchUser(user)}>switch to {user}</button>
+                { 
+                userList.map(user => {
+                    return <button key={1} onClick={() => switchUser(user)}>switch to {user}</button>
                 })}              
             </fieldset>
         </div>
