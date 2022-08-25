@@ -1,16 +1,10 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../db')
-const UserData = sequelize.define(
-    'userdata',
+const PerformanceData = sequelize.define(
+    'performancedata',
     {
         timeStamp: {
             type: DataTypes.STRING
-        },
-        url: {
-            type: DataTypes.STRING,
-        },
-        user: {
-            type: DataTypes.STRING,
         },
         platform: {
             type: DataTypes.STRING
@@ -20,6 +14,9 @@ const UserData = sequelize.define(
         },
         name: {
             type: DataTypes.STRING
+        },
+        data: {
+            type: DataTypes.TEXT
         }
     },
     {
@@ -27,4 +24,4 @@ const UserData = sequelize.define(
         timestamps: false,
     }
 ) 
-module.exports = UserData
+module.exports = PerformanceData

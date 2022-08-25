@@ -2,29 +2,29 @@ const UserData = require('../models/userData')
 const { Op, QueryTypes } = require('sequelize')
 const sequelize = require('../db')
 exports.add = function (data, callback) {
-    let { time, path, device } = data
-    UserData.create({time, path, device}).catch(error =>{
-        console.log(error)
-    })
+    let {browser, name, platform, timeStamp} = data
+    let { url, user} = data.data
+    UserData.create({browser, name, platform, timeStamp, url, user})
 }
 
 exports.getPV = async function (data, callback) {
     let { start, end } = data
     let pv = await UserData.findAll({
         where: {
-            time: {
+            timeStamp: {
                 [Op.gte]: start,
                 [Op.lte]: end
-            }
+            },
+            name: 'enter'
         },
         attributes: [
-            'path',
-            [sequelize.fn('COUNT', sequelize.col('device')), 'pv']
+            'url',
+            [sequelize.fn('COUNT', sequelize.col('id')), 'pv']
         ],
-        group: 'path',
+        group: 'url',
         plain: false,
         order:[
-            [sequelize.fn('COUNT', sequelize.col('device')), 'ASC']
+            [sequelize.fn('COUNT', sequelize.col('id')), 'ASC']
         ]
     })
     callback(pv)
@@ -32,7 +32,7 @@ exports.getPV = async function (data, callback) {
 exports.getUV = async function (data, callback) {
     let { start, end } = data
     let ret = await sequelize.query(
-        'SELECT DISTINCT path, device FROM userdata WHERE time >= ? AND time <= ?',
+        'SELECT DISTINCT url, user FROM userdata WHERE timeStamp >= ? AND timeStamp <= ? AND name = "enter"' ,
         {
             replacements: [start, end],
             type:QueryTypes.SELECT
@@ -41,12 +41,26 @@ exports.getUV = async function (data, callback) {
     let uvMap = new Map()
     let uv = []
     ret.forEach(item => {
-        if(!uvMap.has(item.path)){
-            uvMap.set(item.path, uv.length)
-            uv.push({path: item.path, visit: [item.device]})
+        if(!uvMap.has(item.url)){
+            uvMap.set(item.url, uv.length)
+            uv.push({url: item.url, visit: [item.user]})
         }else {
-            uv[uvMap.get(item.path)].visit.push(item.device)
+            uv[uvMap.get(item.url)].visit.push(item.user)
         }
     });
     callback(uv)
+}
+exports.getPopularBrowser = async function(callback) {
+    let browserList = await UserData.findAll({
+        attributes: [
+            'browser',
+            [sequelize.fn('COUNT', sequelize.col('id')), 'number']
+        ],
+        group: 'browser',
+        plain: false,
+        order: [
+            [sequelize.fn('COUNT', sequelize.col('id')), 'ASC']
+        ]
+    }) 
+    callback(browserList)
 }

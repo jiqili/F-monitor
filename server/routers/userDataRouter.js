@@ -16,4 +16,9 @@ router.post('/getUV', ((req, res) => {
     })
 }))
 
+router.get('/getPopularBrowser', (req, res) => {
+    userDataController.getPopularBrowser(data => {
+        res.send(data)
+    })
+})
 module.exports = router;
