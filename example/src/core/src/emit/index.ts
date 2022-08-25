@@ -6,7 +6,7 @@ type Timeout = ReturnType<typeof window.setTimeout>
 let timer: Timeout
 
 let events: any[] = []
-const requestUrl: string | URL = 'http://localhost:8080'
+let requestUrl: string | URL = ''
 let MAX_CACHE_LEN = 5
 let MAX_WAITING_TIME = 5000
 
@@ -46,7 +46,8 @@ function send() {
   }
 }
 
-export function SetEmitOptions(sendlen: number = 5 ,timelimit: number = 5000 ){
+export function SetEmitOptions(url: any,sendlen: number = 5 ,timelimit: number = 5000 ){
+  requestUrl = url
   MAX_WAITING_TIME = timelimit
   MAX_CACHE_LEN = sendlen
 }

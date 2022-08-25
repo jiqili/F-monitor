@@ -7,20 +7,23 @@ import { SetEmitOptions } from './src/emit';
 import { ErrorBoundary }from './src/error/errorBoundary'; //react错误边界 
 
 
-initPerformance();
-initUser();
-//测试异常部分
-const errorInterceptor = new ErrorInterceptor();
-errorInterceptor.init();
 
-console.log('monitor plugin installed');
-export function SetOptions(options: {
+export const ReactBoundary = ErrorBoundary //导出错误边界
+
+export const initMonitor = (options: {
+  setsetEmitUrl?: any
   setEmitLen?: number
   setEmitTime?: number
   setUrlIgnoreList?: string[] 
-}){
-  SetEmitOptions(options.setEmitLen,options.setEmitTime)
+})=>{
+  initPerformance();
+  initUser();
+  const errorInterceptor = new ErrorInterceptor();
+  errorInterceptor.init();
+  console.log('monitor plugin installed');
+  SetEmitOptions(options.setsetEmitUrl,options.setEmitLen,options.setEmitTime)
   SetUrlIgnoreList(options.setUrlIgnoreList)
 }
 
-export const ReactBoundary=ErrorBoundary //导出错误边界
+
+

@@ -14,7 +14,6 @@ export interface JsErrorInfo {
         url: string | undefined
         row: number | undefined
         col: number | undefined
-        error: any
     }
 }
 export interface ConsoleErrorInfo {

@@ -3,7 +3,7 @@
  *
  */
 
-export const getUserAgent = function (): string {
+ export const getUserAgent = function (): string {
     return window.navigator.userAgent
 }
 // todo:无法获得真实使用的浏览器
@@ -30,7 +30,7 @@ export const getPlatform = () => {
     let userAgent = window.navigator.userAgent,
         // @ts-ignore
         platform = userAgentData?.platform || window.navigator.platform,
-        macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+        macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K', 'macOS'],
         windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
         iosPlatforms = ['iPhone', 'iPad', 'iPod'],
         os = "";
@@ -51,9 +51,9 @@ export const getPlatform = () => {
 }
 
 
-const IPIFY_ENDPOINT_IPV6 = 'https://api.ipify.org?format=json';
+// const IPIFY_ENDPOINT_IPV6 = 'https://api.ipify.org?format=json';
 
-export async function ipify() {
-    return fetch(IPIFY_ENDPOINT_IPV6)
-        .then(response => response.json())
-}
+// export async function ipify() {
+//     return fetch(IPIFY_ENDPOINT_IPV6)
+//         .then(response => response.json())
+// }

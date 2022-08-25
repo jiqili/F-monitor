@@ -1,0 +1,11 @@
+{
+  "name": "nuhchun-monitor",
+  "version": "1.1.1",
+  "description": "A Web monitor plugin.",
+  "main": "bundle.js",
+  "author": "nuhchun",
+  "license": "ISC",
+  "keywords": [
+    "webmonitor"
+  ]
+}
