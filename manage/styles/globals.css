@@ -11,16 +11,12 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+p {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

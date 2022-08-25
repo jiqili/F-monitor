@@ -46,7 +46,7 @@ function send() {
   }
 }
 
-export function SetEmitOptions(url: any,sendlen: number = 5 ,timelimit: number = 5000 ){
+export function SetEmitOptions(url: any, sendlen: number = 5 ,timelimit: number = 5000 ){
   requestUrl = url
   MAX_WAITING_TIME = timelimit
   MAX_CACHE_LEN = sendlen

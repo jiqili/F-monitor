@@ -1,0 +1,30 @@
+.moreWrapper {
+    background-color: rgb(230, 230, 230);
+    border-radius: 24px;
+    padding: 5px 10px 5px 20px;
+    display: flex;
+    max-width: 250px;
+    margin-top: 10px;
+}
+.moreWrapper>p{
+    margin:0;
+    height: 40px;
+    line-height: 40px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.moreButton {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 99rem;
+    background: blue;
+    margin-left: auto;
+    color: white;
+}
+
